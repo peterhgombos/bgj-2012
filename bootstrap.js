@@ -108,7 +108,10 @@ function bootstrap(){
 	});
 
 	/* add game states here */
+	
 	sm.addState("mainmenu", new MainMenuState());
+	sm.addState("game", new GameState());
+	sm.addState("levelmenu", new LevelMenuState());
 
 
 	resize();
@@ -116,7 +119,9 @@ function bootstrap(){
 	document.body.appendChild(canvas);
 
 	/* start the game */
+
 	sm.changeState("mainmenu");
+
     console.log("bootstrapping loaded");
     loaded--;
 	requestAnimFrame(loop);
