@@ -2,19 +2,15 @@ function MainMenuState(){
 }
 
 MainMenuState.prototype.init = function(){
-	this.bgx = 0;
-	this.bgY = 0;
-	this.pbX = 0;
-	this.pbY = 0;
-
-	this.bgtile = new Image();
-
+	this.elements = [];
+	this.elements.push([this.playButtonClicked, {x:7, y:3.5, w:2, h:2}]);
 }
 
 MainMenuState.prototype.pause = function(){
 }
 
 MainMenuState.prototype.resume = function(){
+
 }
 
 MainMenuState.prototype.render = function(ctx){
@@ -23,4 +19,9 @@ MainMenuState.prototype.render = function(ctx){
 }
 
 MainMenuState.prototype.update = function(){
+	
+}
+
+MainMenuState.prototype.playButtonClicked = function(){
+	sm.changeState('levelmenu');
 }
