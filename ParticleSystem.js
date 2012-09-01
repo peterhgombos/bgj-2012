@@ -1,4 +1,4 @@
-function ParticleSystem(){
+function ParticleSystem(emitter){
     this.MAX_PARTICLES = 256*4;
     this.MAX_ATTRACTORS = 8;
 
@@ -14,7 +14,8 @@ function ParticleSystem(){
     }
     this.num_active_attractors = 0;
 
-    this.emitter = {x: 0.1, xVariance: 0.5, y:0.1, yVariance:0.5, timeToNext: 0, speed:0.2, dx:0.06, dy:0.06, dxVariance:0.001, dyVariance:0.001};
+    this.emitter = emitter; 
+    this.emitter.timeToNext = 0;
 }
 
 ParticleSystem.prototype.addParticle = function(x,y,dx,dy){
