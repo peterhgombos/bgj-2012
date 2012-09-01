@@ -177,7 +177,6 @@ function relMouseCoords(e){
 
 window.addEventListener('click', function(e){
 		mouseXY = relMouseCoords(e);
-		console.log(mouseXY.x, mouseXY.y);
 		var coordX, coordY, sizeX, sizeY;
 		for(var i=0; i<sm.activeState.elements.length;i++){
 			coordX = sm.activeState.elements[i][1].x;
@@ -186,7 +185,6 @@ window.addEventListener('click', function(e){
 			sizeY = sm.activeState.elements[i][1].h;
 			console.log(coordX, coordY, sizeX, sizeY);
 			if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
-				console.log('hei');
 				sm.activeState.elements[i][0]();	
 			}
 		}
