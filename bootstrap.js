@@ -187,7 +187,7 @@ window.addEventListener('click', function(e){
 			sizeY = sm.activeState.elements[i][1].h;
 			console.log(coordX, coordY, sizeX, sizeY);
 			if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
-				sm.activeState.elements[i][0]();	
+				sm.activeState.elements[i][0](sm.activeState.elements[i].slice(2));	
 			}
 		}
 	});
