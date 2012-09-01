@@ -19,7 +19,7 @@ MainMenuState.prototype.resume = function(){
 
 MainMenuState.prototype.render = function(ctx){
 	ctx.fillStyle = 'red';
-	ctx.fillRect(3*GU, 8*GU, 4*GU, 7*GU)	
+	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU)	
 }
 
 MainMenuState.prototype.update = function(){
