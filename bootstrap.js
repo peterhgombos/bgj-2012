@@ -41,9 +41,12 @@ function loop(){
     sm.render(ctx);
 
     /* post process scanlines */
+    /*
     if(true || missedGFXFrames < 20){
     ctx.drawImage(scanlinecanvas,0,0);
     }
+    */
+    
     
     /* post process glow */
     if(true || missedGFXFrames < 10){
@@ -105,9 +108,7 @@ function bootstrap(){
 	});
 
 	/* add game states here */
-    /*
 	sm.addState("mainmenu", new MainMenuState());
-    */
 
 
 	resize();
@@ -115,9 +116,7 @@ function bootstrap(){
 	document.body.appendChild(canvas);
 
 	/* start the game */
-    /*
 	sm.changeState("mainmenu");
-    */
     console.log("bootstrapping loaded");
     loaded--;
 	requestAnimFrame(loop);
