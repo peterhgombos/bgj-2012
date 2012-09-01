@@ -7,6 +7,9 @@ function smoothstep(a, b, t) {
 	var v = t * t * (3 - 2 * t);
 	return b * v + a * (1 - v);
 };
+function clamp(low, x, high){
+    return Math.max(low,Math.min(x,high));
+}
 
 window.requestAnimFrame = (function(){
     return  window.requestAnimationFrame       || 
@@ -93,6 +96,12 @@ function bootstrap(){
 	game_data = readData();
 
 	sm = new StateManager();
+    Particle.prototype.sprite = (loaded++,function(){
+        var img = new Image();
+        img.onload = function(){ loaded--; }
+        img.src = "particle.png";
+        return img;
+    })();
 	dt = 0;
 	t = 0;
 	time = +new Date();
@@ -214,9 +223,9 @@ window.addEventListener('click', function(e){
 			coordY = sm.activeState.elements[i][1].y;
 			sizeX = sm.activeState.elements[i][1].w;
 			sizeY = sm.activeState.elements[i][1].h;
-			console.log(coordX, coordY, sizeX, sizeY);
 			if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
 				sm.activeState.elements[i][0](sm.activeState.elements[i].slice(2));	
+                break;
 			}
 		}
 	});

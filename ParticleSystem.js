@@ -14,7 +14,7 @@ function ParticleSystem(){
     }
     this.num_active_attractors = 0;
 
-    this.emitter = {x: 0.1, xVariance: 0.5, y:0.1, yVariance:0.5, timeToNext: 0, speed:2, dx:0.03, dy:0.03, dxVariance:0.001, dyVariance:0.001};
+    this.emitter = {x: 0.1, xVariance: 0.5, y:0.1, yVariance:0.5, timeToNext: 0, speed:0.2, dx:0.06, dy:0.06, dxVariance:0.001, dyVariance:0.001};
 }
 
 ParticleSystem.prototype.addParticle = function(x,y,dx,dy){
@@ -37,6 +37,7 @@ ParticleSystem.prototype.copyParticle = function(from, to){
     to.h = from.h;
     to.dx = from.dx;
     to.dy = from.dy;
+    to.opacity = from.opacity;
 }
 
 ParticleSystem.prototype.addAttractor = function(x,y,m){ 
@@ -59,7 +60,7 @@ ParticleSystem.prototype.copyAttractor = function(from, to){
 
 ParticleSystem.prototype.render = function(ctx){
     ctx.save();
-    ctx.globalCompositeOperation = "lighter";
+    //ctx.globalCompositeOperation = "lighter";
     for(var i=0;i<this.num_active_particles;i++){
         this.particles[i].render(ctx);
     }
@@ -92,6 +93,9 @@ ParticleSystem.prototype.update = function(){
             this.removeParticle(i--);
         }
         else if(this.particles[i].y < -1 || this.particles[i].y > 10){
+            this.removeParticle(i--);
+        }
+        else if(this.particles[i].opacity <= 0){
             this.removeParticle(i--);
         }
     }
