@@ -44,7 +44,6 @@ LevelMenuState.prototype.render = function(ctx) {
 }
 
 LevelMenuState.prototype.chooseLevel = function( params ) {
-    alert("You chose level " + (params[0]+1) + "!");
     sm.changeState("game", "1-" + (params[0]+1));
 }
 
