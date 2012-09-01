@@ -108,6 +108,8 @@ function bootstrap(){
     /*
 	sm.addState("mainmenu", new MainMenuState());
     */
+	sm.addState("game", new GameState());
+	sm.addState("levelmenu", new LevelMenuState());
 
 
 	resize();
