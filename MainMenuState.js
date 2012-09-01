@@ -2,25 +2,29 @@ function MainMenuState(){
 }
 
 MainMenuState.prototype.init = function(){
-	this.bgx = 0;
-	this.bgY = 0;
-	this.pbX = 0;
-	this.pbY = 0;
-
-	this.bgtile = new Image();
-
+    this.ps = new ParticleSystem();
+	this.elements = [];
+	this.elements.push([this.playButtonClicked, {x:7, y:3.5, w:2, h:2}]);
 }
 
 MainMenuState.prototype.pause = function(){
 }
 
 MainMenuState.prototype.resume = function(){
+
 }
 
 MainMenuState.prototype.render = function(ctx){
 	ctx.fillStyle = 'red';
-	ctx.fillRect(3*GU, 8*GU, 4*GU, 7*GU)	
+	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU);
+    this.ps.render(ctx);
 }
 
 MainMenuState.prototype.update = function(){
+    this.ps.update();
+	
+}
+
+MainMenuState.prototype.playButtonClicked = function(){
+	sm.changeState('levelmenu');
 }

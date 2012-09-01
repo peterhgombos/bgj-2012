@@ -1,3 +1,5 @@
+DEBUG = true;
+
 missedGFXFrames = 0;
 
 /* smoothstep interpolaties between a and b, at time t from 0 to 1 */
@@ -152,9 +154,9 @@ function resize(e){
 		scanlinectx.fillRect(0,i*GU+0.6*GU,16*GU,0.1*GU);
 		scanlinectx.fillRect(0,i*GU+0.8*GU,16*GU,0.1*GU);
 	}
-	    scanlinectx.save();
-	    scanlinectx.scale(16*GU/1920,16*GU/1920);
-	    scanlinectx.restore();
+	scanlinectx.save();
+	scanlinectx.scale(16*GU/1920,16*GU/1920);
+	scanlinectx.restore();
 }
 
 function saveData(data) {
@@ -185,5 +187,38 @@ function getCookie(c_name) {
 		}
 	}
 }
+function relMouseCoords(e){
+	var totalOffsetX = 0;
+	var totalOffsetY = 0;
+	var canvasX = 0;
+	var canvasY = 0;
+	var currentElement = this.canvas;
+
+	do{
+		totalOffsetX += currentElement.offsetLeft;
+		totalOffsetY += currentElement.offsetTop;
+	}
+	while(currentElement = currentElement.offsetParent);
+
+	canvasX = (event.pageX||(event.touches[0]&&event.touches[0].pageX)||(this.cached_coords.x+totalOffsetX)) - totalOffsetX;
+	canvasY = (event.pageY||(event.touches[0]&&event.touches[0].pageY)||(this.cached_coords.y+totalOffsetY)) - totalOffsetY;
+
+	return {x:canvasX/GU, y:canvasY/GU}
+}
+
+window.addEventListener('click', function(e){
+		mouseXY = relMouseCoords(e);
+		var coordX, coordY, sizeX, sizeY;
+		for(var i=0; i<sm.activeState.elements.length;i++){
+			coordX = sm.activeState.elements[i][1].x;
+			coordY = sm.activeState.elements[i][1].y;
+			sizeX = sm.activeState.elements[i][1].w;
+			sizeY = sm.activeState.elements[i][1].h;
+			console.log(coordX, coordY, sizeX, sizeY);
+			if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
+				sm.activeState.elements[i][0]();	
+			}
+		}
+	});
 
 window.onresize = resize;
