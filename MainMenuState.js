@@ -2,7 +2,8 @@ function MainMenuState(){
 }
 
 MainMenuState.prototype.init = function(){
-	this.elements = [];
+    this.background = loadImage("resources/mainmenubg.png");
+    this.elements = [];
 	this.elements.push([this.playButtonClicked, {x:7, y:3.5, w:2, h:2}]);
 }
 
@@ -14,10 +15,13 @@ MainMenuState.prototype.resume = function(){
 }
 
 MainMenuState.prototype.render = function(ctx){
-    ctx.fillStyle = "#7BC944";
-    ctx.fillRect(0,0,16*GU,9*GU);
+    ctx.save();
+    var scaler = 16*GU/1920;
+    ctx.scale(scaler, scaler);
+    ctx.drawImage(this.background,0,0);
+    ctx.restore();
 	ctx.fillStyle = 'red';
-	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU);
+	ctx.fillRect(7*GU, 6.5*GU, 2*GU, 2*GU);
 }
 
 MainMenuState.prototype.update = function(){

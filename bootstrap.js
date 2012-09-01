@@ -11,6 +11,14 @@ function clamp(low, x, high){
     return Math.max(low,Math.min(x,high));
 }
 
+function loadImage(path){
+    var img = new Image();
+    loaded++;
+    img.onload = function(){loaded--};
+    img.src = path;
+    return img;
+}
+
 window.requestAnimFrame = (function(){
     return  window.requestAnimationFrame       || 
     window.webkitRequestAnimationFrame || 
