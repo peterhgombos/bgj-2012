@@ -1,8 +1,8 @@
-bgj-2012
+windwill
 ========
 *created by sigveseb, stiaje, cristea and gombos*
 
-expect awesomeness
+a logic game/puzzle chillax created for bacongamejam 03
 
 ## Docs
 * http://code.google.com/p/miniajax/
