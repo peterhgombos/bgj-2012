@@ -3,8 +3,13 @@ function LevelMenuState(){
 
 LevelMenuState.prototype.init = function() {
     this.numberOfLevels = 15;
+    //this.background = loadImage("resources/levelmenubg.png");
     this.elements = [];
+    this.levelSprites = [];
     this.levelTiles = [];
+    for(var i=0;i<15;i++){
+        this.levelSprites[i] = loadImage("resources/"+(i+1)+".png");
+    }
 }
 
 LevelMenuState.prototype.resume = function() {
@@ -21,16 +26,18 @@ LevelMenuState.prototype.pause = function() {
 
 LevelMenuState.prototype.update = function() {
 }
+
 LevelMenuState.prototype.render = function(ctx) { 
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,16*GU, 9*GU);
     for (var i=0; i < this.levelTiles.length; i++) {
         var levelTile = this.levelTiles[i];
-        ctx.fillStyle = 'grey';
-        ctx.fillRect(levelTile.x*GU, levelTile.y*GU, levelTile.w*GU, levelTile.h*GU);
-        ctx.fillStyle = 'white';
-        ctx.font =  (GU)+"px Arial";
-        ctx.textBaseline = 'hanging';
-        ctx.textAlign = 'center';
-        ctx.fillText(i+1, (levelTile.x+levelTile.w/2)*GU, (levelTile.y+levelTile.h/10)*GU);
+        ctx.save();
+        var scaler = GU/this.levelSprites[i].width;
+        ctx.translate(levelTile.x*GU, levelTile.y*GU);
+        ctx.scale(scaler,scaler);
+        ctx.drawImage(this.levelSprites[i],0,0);
+        ctx.restore();
     }
     ctx.fillStyle = 'grey';
     ctx.fillRect(this.backButtonObject.x*GU, this.backButtonObject.y*GU, this.backButtonObject.w*GU, this.backButtonObject.h*GU);
