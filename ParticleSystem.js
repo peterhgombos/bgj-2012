@@ -8,9 +8,11 @@ function ParticleSystem(emitter){
     }
     this.num_active_particles = 0;
 
+    this.cdd = new CanvasDragDrop(canvas);
     this.attractors = [];
     for(var i=0;i<this.MAX_ATTRACTORS;i++){
         this.attractors[i] = new ParticleAttractor();
+        this.cdd.makeDraggable(this.attractors[i]);
     }
     this.num_active_attractors = 0;
 
@@ -44,9 +46,13 @@ ParticleSystem.prototype.copyParticle = function(from, to){
 ParticleSystem.prototype.addAttractor = function(x,y,m){ 
     if(this.num_active_attractors >= this.MAX_ATTRACTORS) return;
     var a = this.attractors[this.num_active_attractors++];
-    a.x = x;
-    a.y = y;
+    a.position.x = x;
+    a.position.y = y;
+    a.size.w = .3;
+    a.size.h = .3;
     a.m = m;
+
+    return a;
 }
 
 ParticleSystem.prototype.removeAttractor = function(i){
@@ -54,8 +60,8 @@ ParticleSystem.prototype.removeAttractor = function(i){
 }
 
 ParticleSystem.prototype.copyAttractor = function(from, to){
-    to.x = from.x;
-    to.y = from.y;
+    to.position.x = from.position.x;
+    to.position.y = from.position.y;
     to.m = from.m;
 }
 
@@ -81,8 +87,8 @@ ParticleSystem.prototype.update = function(){
         var a = this.attractors[i];
         for(var j=0;j<this.num_active_particles;j++){
             var p = this.particles[j];
-            var rx = a.x-p.x;
-            var ry = a.y-p.y;
+            var rx = a.position.x-p.x;
+            var ry = a.position.y-p.y;
             var rSquared = rx*rx+ry*ry;
             p.dx += rx/Math.abs(rx)*(0.0001*a.m/(rSquared));
             p.dy += ry/Math.abs(ry)*(0.0001*a.m/(rSquared));

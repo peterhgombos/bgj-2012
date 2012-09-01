@@ -215,7 +215,10 @@ function relMouseCoords(e){
 	return {x:canvasX/GU, y:canvasY/GU}
 }
 
-window.addEventListener('click', function(e){
+window.addEventListener('click', yo);
+window.addEventListener('touchstart', yo);
+        
+    function yo(e){
 		mouseXY = relMouseCoords(e);
 		var coordX, coordY, sizeX, sizeY;
 		for(var i=0; i<sm.activeState.elements.length;i++){
@@ -228,6 +231,6 @@ window.addEventListener('click', function(e){
                 break;
 			}
 		}
-	});
+	}
 
 window.onresize = resize;
