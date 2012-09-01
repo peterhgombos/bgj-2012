@@ -9,6 +9,8 @@ MainMenuState.prototype.init = function(){
 
 	this.bgtile = new Image();
 
+    this.ps = new ParticleSystem();
+
 }
 
 MainMenuState.prototype.pause = function(){
@@ -19,8 +21,10 @@ MainMenuState.prototype.resume = function(){
 
 MainMenuState.prototype.render = function(ctx){
 	ctx.fillStyle = 'red';
-	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU)	
+	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU);
+    this.ps.render(ctx);
 }
 
 MainMenuState.prototype.update = function(){
+    this.ps.update();
 }

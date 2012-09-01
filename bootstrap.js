@@ -1,3 +1,5 @@
+DEBUG = true;
+
 missedGFXFrames = 0;
 
 /* smoothstep interpolaties between a and b, at time t from 0 to 1 */
