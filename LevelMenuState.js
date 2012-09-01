@@ -9,7 +9,7 @@ LevelMenuState.prototype.init = function() {
 
 LevelMenuState.prototype.resume = function() {
     for (var i=0;i<this.numberOfLevels;i++) {
-        this.levelTiles[i] = {x: 2.75+2.25*(i%5), y: 1.5+2.25*((i/5)|0), w:1.5, h:1.5, locked:true, stars:0};
+        this.levelTiles[i] = {x: 1.5+2.75*(i%5), y: 1.5+2.25*((i/5)|0), w:2, h:1.5, locked:true, stars:0};
         this.elements.push([this.chooseLevel, this.levelTiles[i], i ]);
     }
     this.backButtonObject = {x: 0.5, y: 0.5, w: 1.5, h: 0.5}
@@ -38,6 +38,7 @@ LevelMenuState.prototype.render = function(ctx) {
 
 LevelMenuState.prototype.chooseLevel = function( params ) {
     alert("You chose level " + (params[0]+1) + "!");
+    sm.changeState("game", "1-" + params[0]);
 }
 
 LevelMenuState.prototype.backButton = function( params ) {
