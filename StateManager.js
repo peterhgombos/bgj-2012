@@ -9,10 +9,10 @@ StateManager.prototype.addState = function(name, state){
 	this.states[name] = state;
 }
 
-StateManager.prototype.changeState = function(name){
+StateManager.prototype.changeState = function(name, message){
 	if(this.activeState) this.activeState.pause();
 	this.activeState = this.states[name];
-	this.activeState.resume();
+	this.activeState.resume(message);
 }
 
 StateManager.prototype.render = function(ctx){
