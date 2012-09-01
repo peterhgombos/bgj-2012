@@ -15,6 +15,8 @@ MainMenuState.prototype.resume = function(){
 }
 
 MainMenuState.prototype.render = function(ctx){
+    ctx.fillStyle = "#7BC944";
+    ctx.fillRect(0,0,16*GU,9*GU);
 	ctx.fillStyle = 'red';
 	ctx.fillRect(7*GU, 3.5*GU, 2*GU, 2*GU);
     this.ps.render(ctx);
