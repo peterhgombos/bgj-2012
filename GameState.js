@@ -6,6 +6,7 @@ GameState.prototype.init = function(){
     this.level_data = [];
     this.background = loadImage("resources/gamebg.png");
     this.completebox = loadImage("resources/completebox.png");
+    this.tutorial_1 = loadImage("resources/tutorial_1.png");
     this.elements = [
         [function(){self.restart()}, {x:15, y:8.1, w:.9, h:.7}],
         [function(){sm.changeState("levelmenu")}, {x:14, y:8.1, w:.9, h:.7}]
@@ -70,6 +71,7 @@ GameState.prototype.update = function() {
     }
 }
 GameState.prototype.win = function() {
+    cdd.reset();
     var activeAttractors = this.ps.getActiveAttractors();
     var attractor_score = Math.round(3*this.level_data.minimum_attractors/activeAttractors.length);
     if (attractor_score < 1) attractor_score = 1;
@@ -95,6 +97,7 @@ GameState.prototype.render = function(ctx) {
         this.walls[i].render(ctx);
     }
 
+
     this.gameObjectContainer.render(ctx);
     this.ps.render(ctx);
     this.gameMenuWindow.render(ctx);
@@ -103,6 +106,10 @@ GameState.prototype.render = function(ctx) {
         ctx.fillStyle = "rgba(255,0,0,0.5)";
         ctx.fillRect(o.x*GU,o.y*GU,o.w*GU,o.h*GU);
     }*/
+    
+    if (game_data["progress"][this.level_id] == 0) {
+        ctx.drawImage(this.tutorial_1, 8.5*GU, 5*GU, 5*GU, 3*GU);
+    }
 }
 
 GameState.prototype.readLevel = function(level) {
