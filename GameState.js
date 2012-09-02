@@ -13,12 +13,13 @@ GameState.prototype.init = function(){
                 self.ps.activateAttractor(e.draggable);
             }
     });
-    this.gameMenuWindow = new GameMenuWindow(this);
 }
 
 GameState.prototype.resume = function(message){
     this.readLevel(message);
     this.message = message;
+    this.gameMenuWindow = new GameMenuWindow(this);
+    this.windmills = [];
 }
 GameState.prototype.restart = function() {
     sm.changeState("game", this.message);
@@ -26,7 +27,6 @@ GameState.prototype.restart = function() {
 GameState.prototype.levelDataLoaded = function(level_data) {
     this.level_data = level_data;
     this.ps = new ParticleSystem(this.level_data.emitter, this.level_data.attractors);
-    this.windmills = [];
     for(var i=0;i<this.level_data.windmills.length;i++){
         var wm = this.level_data.windmills[i];
         this.windmills[i] = new Windmill(wm[0],wm[1],1,1,this.ps);
@@ -36,6 +36,7 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 
 GameState.prototype.pause = function(){
     this.gameMenuWindow.hide();
+    this.elements = [];
     console.log("puase!");
 }
 
