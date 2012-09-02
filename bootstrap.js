@@ -115,6 +115,7 @@ function bootstrap(){
 	sm.addState("mainmenu", new MainMenuState());
 	sm.addState("game", new GameState());
 	sm.addState("levelmenu", new LevelMenuState());
+	sm.addState("credits", new CreditsState());
 
 
 	resize();
@@ -123,7 +124,7 @@ function bootstrap(){
 
 	/* start the game */
 
-	sm.changeState("mainmenu","1-1");
+	sm.changeState("mainmenu");
 
     console.log("bootstrapping loaded");
     loaded--;
