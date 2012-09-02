@@ -102,6 +102,7 @@ function bootstrap(){
 	scanlinecanvas = document.createElement("canvas");
 	scanlinectx = scanlinecanvas.getContext("2d");
 	game_data = readData();
+    cdd = new CanvasDragDrop(canvas);
 
 	sm = new StateManager();
     Particle.prototype.sprite = (loaded++,function(){
