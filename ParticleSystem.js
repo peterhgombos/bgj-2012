@@ -147,7 +147,7 @@ ParticleSystem.prototype.update = function(){
                 break;
             }
         }
-        if(this.particles[i].position.x < -1 || this.particles[i].position.x > 17){
+        if(this.particles[i].position.x < -1 || this.particles[i].position.x >= 14){
             this.removeParticle(i--);
         }
         else if(this.particles[i].position.y < -1 || this.particles[i].position.y > 10){

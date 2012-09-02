@@ -23,6 +23,8 @@ GameState.prototype.resume = function(message){
     this.message = message;
     this.gameMenuWindow = new GameMenuWindow(this);
     this.windmills = [];
+    this.has_won = false;
+    this.is_ready = false;
 }
 GameState.prototype.restart = function() {
     sm.changeState("game", this.message);
@@ -58,7 +60,8 @@ GameState.prototype.update = function() {
         this.doneTimer = 50;
     }
 
-    if (this.doneTimer == 0) {
+    if (this.doneTimer == 0 && !this.has_won) {
+        this.has_won = true;
         this.win();
     }
 }
