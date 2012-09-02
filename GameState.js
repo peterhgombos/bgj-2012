@@ -39,7 +39,6 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 
 GameState.prototype.pause = function(){
     this.gameMenuWindow.hide();
-    console.log("puase!");
 }
 
 GameState.prototype.update = function() {
@@ -56,7 +55,7 @@ GameState.prototype.update = function() {
     if(completed == this.windmills.length){
         if (this.doneTimer >= 0) this.doneTimer--;
     } else {
-        this.doneTimer = 100;
+        this.doneTimer = 50;
     }
 
     if (this.doneTimer == 0) {
