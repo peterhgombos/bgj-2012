@@ -131,6 +131,7 @@ CanvasDragDrop.prototype.relMouseCoords = function(e){
     }
     while(currentElement = currentElement.offsetParent);
 
+    var event = e;
     canvasX = (event.pageX||(event.touches[0]&&event.touches[0].pageX)||(GU*this.cached_coords.x+totalOffsetX)) - totalOffsetX;
     canvasY = (event.pageY||(event.touches[0]&&event.touches[0].pageY)||(GU*this.cached_coords.y+totalOffsetY)) - totalOffsetY;
 
