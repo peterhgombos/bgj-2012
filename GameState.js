@@ -4,6 +4,7 @@ function GameState() {
 GameState.prototype.init = function(){
     var self = this;
     this.level_data = [];
+    this.background = loadImage("resources/gamebg.png");
     this.elements = [
         [function(){self.restart()}, {x:14.2, y:7.5, w:.6, h:.6}],
         [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]
@@ -79,6 +80,11 @@ GameState.prototype.win = function() {
 GameState.prototype.render = function(ctx) {
     if (!this.is_ready) return;
 
+    var scaler = 16*GU/1920;
+    ctx.save();
+    ctx.scale(scaler,scaler);
+    ctx.drawImage(this.background,0,0);
+    ctx.restore();
     for(var i=0;i<this.windmills.length;i++){
         this.windmills[i].render(ctx);
     }
