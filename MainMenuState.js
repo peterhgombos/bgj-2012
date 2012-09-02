@@ -29,8 +29,6 @@ MainMenuState.prototype.render = function(ctx){
     ctx.rotate(-this.t/300);
     ctx.drawImage(this.blades,-this.blades.width/2,-this.blades.height/2);
     ctx.restore();
-	ctx.fillStyle = "rgba(0,0,0,0.5)";
-	ctx.fillRect(this.playButton.x*GU, this.playButton.y*GU, this.playButton.w*GU, this.playButton.h*GU);
 }
 
 MainMenuState.prototype.update = function(){
