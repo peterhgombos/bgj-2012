@@ -9,6 +9,7 @@ function ParticleSystem(emitter, attractors){
     }
     this.num_active_particles = 0;
 
+    this.offScreen = 0;
 
     /* list of external objects with position and size that collide with particles */
     this.colliders = [];
@@ -66,6 +67,7 @@ ParticleSystem.prototype.addParticle = function(x,y,dx,dy){
     p.position.y = y;
     p.speed.dx = dx||0;
     p.speed.dy = dy||0;
+    p.opacity = 1;
 }
 
 ParticleSystem.prototype.removeParticle = function(i){
@@ -96,14 +98,14 @@ ParticleSystem.prototype.deactivateAttractor = function(a) {
         }
     }
 }
-ParticleSystem.prototype.printActiveAttractors = function() {
+ParticleSystem.prototype.getActiveAttractors = function() {
     var solution = [];
     for (var i=0; i < this.attractors.length; i++) {
         if ( this.attractors[i].active ) {
             solution.push( {x:this.attractors[i].position.x, y:this.attractors[i].position.y, size:this.attractors[i].size.w} );
         }
     }
-    console.log(solution);
+    return solution;
 }
 
 ParticleSystem.prototype.render = function(ctx){
@@ -152,6 +154,7 @@ ParticleSystem.prototype.update = function(){
         }
         else if(this.particles[i].position.y < -1 || this.particles[i].position.y > 10){
             this.removeParticle(i--);
+            this.offScreen++;
         }
         else if(this.particles[i].opacity <= 0){
             this.removeParticle(i--);

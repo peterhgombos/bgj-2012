@@ -68,9 +68,10 @@ GameState.prototype.update = function() {
     }
 }
 GameState.prototype.win = function() {
-    this.ps.printActiveAttractors();
+    var activeAttractors = this.ps.getActiveAttractors();
+    var attractor_score = Math.round((this.level_data.attractors.length-activeAttractors.length)/this.level_data.attractors.length*3+1);
     this.gameMenuWindow.show();
-    game_data["progress"][this.level_id] = 1;
+    game_data["progress"][this.level_id] = Math.min(Math.max(attractor_score, 1),3);
     game_data["progress"][this.level_id+1] = 0;
     saveData(game_data);
 }
@@ -89,7 +90,7 @@ GameState.prototype.render = function(ctx) {
 
 GameState.prototype.readLevel = function(level) {
     var self = this;
-    ajax.get('levels/' + level + '.json?t=' + time, function(data) {
+    ajax.get('levels/' + level + '.json?t=' +(1*new Date), function(data) {
 		if (data.substr(0,1) != "{") return false;
         level_data = JSON.parse(data);
         self.levelDataLoaded(level_data);
