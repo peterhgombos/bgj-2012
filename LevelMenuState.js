@@ -5,7 +5,6 @@ LevelMenuState.prototype.init = function() {
     this.numberOfLevels = 15;
     this.background = loadImage("resources/levelmenustaticbg.png");
     this.sky = loadImage("resources/skybg.png");
-    this.star = loadImage("resources/star.png");
     this.elements = [];
     this.levelSprites = [];
     this.levelTiles = [];
@@ -53,7 +52,7 @@ LevelMenuState.prototype.render = function(ctx) {
         ctx.drawImage(levelTile.locked?this.lockedTile:this.levelSprites[i],0,0);
         ctx.translate(0.36*GU/scaler, 1.30*GU/scaler);
         for(var j=0;j<levelTile.stars;j++){
-            ctx.drawImage(this.star,0,0);
+            ctx.drawImage(star,0,0);
             ctx.translate(0.3*GU/scaler, 0);
         }
         ctx.restore();

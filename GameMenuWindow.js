@@ -9,8 +9,9 @@ function GameMenuWindow(game) {
     this.game = game;
 }
 
-GameMenuWindow.prototype.show = function() {
+GameMenuWindow.prototype.show = function(number_of_stars) {
     this.visible = true;
+    this.number_of_stars = number_of_stars;
 }
 GameMenuWindow.prototype.hide = function() {
     this.visible = false;
@@ -27,6 +28,9 @@ GameMenuWindow.prototype.render = function(ctx) {
         ctx.translate(5*GU/scaler,2.9*GU/scaler);
         ctx.drawImage(this.game.completebox,0,0);
         ctx.restore();
+        for(var i=0;i<this.number_of_stars;i++) {
+            ctx.drawImage(star,(6.65+i)*GU,4.2*GU, .7*GU, .7*GU);
+        }
 }
 
 GameMenuWindow.prototype.gotoLevelMenu = function() {

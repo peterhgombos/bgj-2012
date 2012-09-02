@@ -91,6 +91,7 @@ function bootstrap(){
     Wall.prototype.treesbotleft =loadImage("resources/trees-botleft.png");
     Wall.prototype.treesbotright =loadImage("resources/trees-botright.png");
 
+    star = loadImage("resources/star.png");
 	dt = 0;
 	t = 0;
 	time = +new Date();
