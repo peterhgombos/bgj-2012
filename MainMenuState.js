@@ -4,7 +4,8 @@ function MainMenuState(){
 MainMenuState.prototype.init = function(){
     this.background = loadImage("resources/mainmenubg.png");
     this.elements = [];
-	this.elements.push([this.playButtonClicked, {x:7, y:3.5, w:2, h:2}]);
+    this.playButton = {x:7, y:6.5, w:2, h:2};
+	this.elements.push([this.playButtonClicked, this.playButton ]);
 }
 
 MainMenuState.prototype.pause = function(){
@@ -21,7 +22,7 @@ MainMenuState.prototype.render = function(ctx){
     ctx.drawImage(this.background,0,0);
     ctx.restore();
 	ctx.fillStyle = 'red';
-	ctx.fillRect(7*GU, 6.5*GU, 2*GU, 2*GU);
+	ctx.fillRect(this.playButton.x*GU, this.playButton.y*GU, this.playButton.w*GU, this.playButton.h*GU);
 }
 
 MainMenuState.prototype.update = function(){

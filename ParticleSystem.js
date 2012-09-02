@@ -1,6 +1,6 @@
-function ParticleSystem(emitter){
+function ParticleSystem(emitter, attractors){
     this.MAX_PARTICLES = 256*4;
-    this.MAX_ATTRACTORS = 8;
+    this.MAX_ATTRACTORS = attractors.length;
 
     this.particles = [];
     for(var i=0;i<this.MAX_PARTICLES;i++){
@@ -8,11 +8,24 @@ function ParticleSystem(emitter){
     }
     this.num_active_particles = 0;
 
-    this.cdd = new CanvasDragDrop(canvas);
+
+    attractors.sort(function(a,b){return b-a});
     this.attractors = [];
+    list_x_offset = 0; list_y_offset = 0;
     for(var i=0;i<this.MAX_ATTRACTORS;i++){
-        this.attractors[i] = new ParticleAttractor();
-        this.cdd.makeDraggable(this.attractors[i]);
+        if (list_x_offset + attractors[i] > 1.6 || (i>0 && attractors[i] != attractors[i-1])) {
+            list_x_offset = 0;
+            list_y_offset += attractors[i-1] + .2;
+        }
+        this.attractors[i] = new ParticleAttractor(
+                (14.2 + list_x_offset),
+                (1 + list_y_offset),
+                attractors[i]*650,
+                attractors[i],
+                attractors[i]
+                );
+        cdd.makeDraggable(this.attractors[i]);
+        list_x_offset += attractors[i] + .2;
     }
     this.num_active_attractors = 0;
 
@@ -43,26 +56,19 @@ ParticleSystem.prototype.copyParticle = function(from, to){
     to.opacity = from.opacity;
 }
 
-ParticleSystem.prototype.addAttractor = function(x,y,m){ 
-    if(this.num_active_attractors >= this.MAX_ATTRACTORS) return;
-    var a = this.attractors[this.num_active_attractors++];
-    a.position.x = x;
-    a.position.y = y;
-    a.size.w = .3;
-    a.size.h = .3;
-    a.m = m;
-
-    return a;
+ParticleSystem.prototype.activateAttractor = function(a) {
+    for (var i=0; i < this.attractors.length; i++) {
+        if ( this.attractors[i] == a ) {
+            this.attractors[i].active = true;
+        }
+    }
 }
-
-ParticleSystem.prototype.removeAttractor = function(i){
-    this.copyAttractor(this.attractors[--this.num_active_attractors], this.attractors[i]);
-}
-
-ParticleSystem.prototype.copyAttractor = function(from, to){
-    to.position.x = from.position.x;
-    to.position.y = from.position.y;
-    to.m = from.m;
+ParticleSystem.prototype.deactivateAttractor = function(a) {
+    for (var i=0; i < this.attractors.length; i++) {
+        if ( this.attractors[i] == a ) {
+            this.attractors[i].active = false;
+        }
+    }
 }
 
 ParticleSystem.prototype.render = function(ctx){
@@ -72,7 +78,7 @@ ParticleSystem.prototype.render = function(ctx){
         this.particles[i].render(ctx);
     }
     ctx.restore();
-    for(var i=0;i<this.num_active_attractors;i++){
+    for(var i=0;i<this.attractors.length;i++){
         this.attractors[i].render(ctx);
     }
 }
@@ -83,7 +89,8 @@ ParticleSystem.prototype.update = function(){
         this.emitter.timeToNext += this.emitter.speed;
         this.addParticle(this.emitter.x+(Math.random()-0.5)*this.emitter.xVariance, this.emitter.y+(Math.random()-0.5)*this.emitter.yVariance, this.emitter.dx+(Math.random()-0.5)*this.emitter.dxVariance, this.emitter.dy+(Math.random()+0.5)*this.emitter.dyVariance);
     }
-    for(var i=0;i<this.num_active_attractors;i++){
+    for(var i=0;i<this.attractors.length;i++){
+        if (!this.attractors[i].active) continue;
         var a = this.attractors[i];
         for(var j=0;j<this.num_active_particles;j++){
             var p = this.particles[j];
