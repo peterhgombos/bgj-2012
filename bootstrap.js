@@ -146,7 +146,6 @@ function saveData(data) {
 	setCookie("game_data", json_data, 10^5);
 }
 function readData() {
-       return {progress:[0,3,3,3,3,3,3,3,3,3,3,3,3,3,3]};
 	json_data = getCookie("game_data");
 	if (json_data !== undefined) {
 		return JSON.parse(json_data);

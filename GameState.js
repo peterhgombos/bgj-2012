@@ -113,7 +113,7 @@ GameState.prototype.render = function(ctx) {
         ctx.fillRect(o.x*GU,o.y*GU,o.w*GU,o.h*GU);
     }*/
     
-    if (game_data["progress"][this.level_id] == 0) {
+    if (game_data["progress"][this.level_id] == 0 && this.level_id == 0) {
         ctx.drawImage(this.tutorial_1, 8.5*GU, 5*GU, 5*GU, 3*GU);
     }
 }
