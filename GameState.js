@@ -7,6 +7,10 @@ GameState.prototype.init = function(){
     this.background = loadImage("resources/gamebg.png");
     this.completebox = loadImage("resources/completebox.png");
     this.tutorial_1 = loadImage("resources/tutorial_1.png");
+    this.levels = {};
+    for(var i=1;i<16;i++){
+        this.levels["1-"+i] = this.readLevel("1-"+i);
+    }
     this.elements = [
         [function(){self.restart()}, {x:15, y:8.1, w:.9, h:.7}],
         [function(){sm.changeState("levelmenu")}, {x:14, y:8.1, w:.9, h:.7}]
@@ -15,14 +19,15 @@ GameState.prototype.init = function(){
 }
 
 GameState.prototype.resume = function(message){
-    this.readLevel(message);
+    //this.readLevel(message);
+    this.windmills = [];
     this.message = message;
     this.level_id = (function(){a=message.split("-");return (15*(a[0]-1))+(a[1]-1)})();
     console.log("Loaded level " + this.level_id);
     this.gameMenuWindow = new GameMenuWindow(this);
-    this.windmills = [];
     this.has_won = false;
     this.is_ready = false;
+    this.levelDataLoaded(this.levels[message]);
 }
 GameState.prototype.restart = function() {
     sm.changeState("game", this.message);
@@ -114,6 +119,7 @@ GameState.prototype.render = function(ctx) {
 
 GameState.prototype.readLevel = function(level) {
     var self = this;
+    loaded++;
     ajax.get('levels/' + level + '.json?t=' +(1*new Date), function(data) {
         if (data.substr(0,1) != "{") {
             sm.changeState("levelmenu");
@@ -124,6 +130,8 @@ GameState.prototype.readLevel = function(level) {
         level_data.walls = level_data.walls||[];
         level_data.minimum_attractors = level_data.minimum_attractors||1;
         
-        self.levelDataLoaded(level_data);
+        //self.levelDataLoaded(level_data);
+        loaded--;
+        self.levels[level] = level_data;
     });
 }
