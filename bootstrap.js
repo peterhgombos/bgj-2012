@@ -62,11 +62,12 @@ function loop(){
     
     
     /* post process glow */
+    /*
     if(true || missedGFXFrames < 10){
 	    blurcanvas.width = blurcanvas.width;
 	    blurctx.scale(0.5,0.5);
 	    blurctx.drawImage(canvas,0,0);
-	    for(var i=0;i<4;i++){
+	    for(var i=0;i<1;i++){
 		    glowcanvas.width = glowcanvas.width;
 		    glowctx.scale(2,2);
 		    glowctx.drawImage(blurcanvas,0,0);
@@ -82,6 +83,7 @@ function loop(){
     ctx.drawImage(glowcanvas,0,0);
     ctx.restore();
     }
+    */
 
 
     requestAnimFrame(loop);
@@ -185,7 +187,10 @@ function readData() {
 	json_data = getCookie("game_data");
 	if (json_data !== undefined) {
 		return JSON.parse(json_data);
-	}
+	}else{
+        /* default game_data object */
+       return {progress:[0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]};
+    }
 }
 
 function setCookie(c_name,value,exdays) {
