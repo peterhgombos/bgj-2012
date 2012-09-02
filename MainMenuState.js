@@ -7,7 +7,9 @@ MainMenuState.prototype.init = function(){
     this.blades = loadImage("resources/blades.png");
     this.elements = [];
     this.playButton = {x:1.4, y:3.6, w:3.4, h:1.5};
+    this.creditsButton = {x:0.3, y:8.1, w:1.6, h:0.6};
 	this.elements.push([this.playButtonClicked, this.playButton ]);
+	this.elements.push([this.creditsButtonClicked, this.creditsButton]);
     this.t = 0;
 }
 
@@ -39,4 +41,8 @@ MainMenuState.prototype.update = function(){
 
 MainMenuState.prototype.playButtonClicked = function(){
 	sm.changeState('levelmenu','', 'slide-left', 15);
+}
+
+MainMenuState.prototype.creditsButtonClicked = function(){
+	sm.changeState('credits','', 'slide-right', 15);
 }
