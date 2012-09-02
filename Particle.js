@@ -43,6 +43,8 @@ Particle.prototype.update = function(){
         this.speed.dy *= scaler;
     }else if(speed < this.MIN_SPEED){
         this.opacity -= 0.01; 
+    } else {
+        this.opacity = 1;
     }
 }
 
