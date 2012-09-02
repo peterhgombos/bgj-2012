@@ -181,7 +181,7 @@ function resize(e){
 
 function saveData(data) {
 	json_data = JSON.stringify(data);
-	setCookie("game_data", json_data, 10*5);
+	setCookie("game_data", json_data, 10^5);
 }
 function readData() {
 	json_data = getCookie("game_data");
