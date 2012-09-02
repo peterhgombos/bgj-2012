@@ -23,10 +23,15 @@ function ParticleSystem(emitter, attractors){
             list_x_offset = 0;
             list_y_offset += attractors[i-1] + .2;
         }
+        var mass = Math.pow(attractors[i],2)*270;
+        if (this.attractors[i] < 0) {
+            this.attractors[i] *= -1;
+            mass *= -1;
+        }
         this.attractors[i] = new ParticleAttractor(
                 (14.2 + list_x_offset),
                 (1 + list_y_offset),
-                Math.pow(attractors[i],2)*270,
+                mass,
                 attractors[i],
                 attractors[i]
                 );
