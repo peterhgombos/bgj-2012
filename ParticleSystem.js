@@ -27,7 +27,7 @@ function ParticleSystem(emitter, attractors){
         this.attractors[i] = new ParticleAttractor(
                 (14.2 + list_x_offset),
                 (1 + list_y_offset),
-                attractors[i]*650,
+                Math.pow(attractors[i],2)*270,
                 attractors[i],
                 attractors[i]
                 );
@@ -147,7 +147,7 @@ ParticleSystem.prototype.update = function(){
                 break;
             }
         }
-        if(this.particles[i].position.x < -1 || this.particles[i].position.x > 17){
+        if(this.particles[i].position.x < -1 || this.particles[i].position.x >= 14){
             this.removeParticle(i--);
         }
         else if(this.particles[i].position.y < -1 || this.particles[i].position.y > 10){
