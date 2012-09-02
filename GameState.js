@@ -72,7 +72,7 @@ GameState.prototype.win = function() {
     var activeAttractors = this.ps.getActiveAttractors();
     var attractor_score = Math.round(3*this.level_data.minimum_attractors/activeAttractors.length);
     console.log(attractor_score);
-    this.gameMenuWindow.show();
+    this.gameMenuWindow.show(attractor_score);
     game_data["progress"][this.level_id] = Math.min(Math.max(attractor_score, game_data["progress"][this.level_id], 1),3);
     if (game_data["progress"][this.level_id+1] == -1) game_data["progress"][this.level_id+1] = 0;
     saveData(game_data);
