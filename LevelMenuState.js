@@ -51,10 +51,10 @@ LevelMenuState.prototype.render = function(ctx) {
         ctx.translate(levelTile.x*GU, levelTile.y*GU);
         ctx.scale(scaler,scaler);
         ctx.drawImage(levelTile.locked?this.lockedTile:this.levelSprites[i],0,0);
-        ctx.translate(0.22*levelTile.w*GU, 0.85*levelTile.h*GU);
+        ctx.translate(0.36*GU/scaler, 1.30*GU/scaler);
         for(var j=0;j<levelTile.stars;j++){
             ctx.drawImage(this.star,0,0);
-            ctx.translate(0.4*GU, 0);
+            ctx.translate(0.3*GU/scaler, 0);
         }
         ctx.restore();
     }
