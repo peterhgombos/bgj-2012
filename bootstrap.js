@@ -115,6 +115,7 @@ function bootstrap(){
 	sm.addState("mainmenu", new MainMenuState());
 	sm.addState("game", new GameState());
 	sm.addState("levelmenu", new LevelMenuState());
+	sm.addState("credits", new CreditsState());
 
 
 	resize();
@@ -123,7 +124,7 @@ function bootstrap(){
 
 	/* start the game */
 
-	sm.changeState("mainmenu","1-1");
+	sm.changeState("mainmenu");
 
     console.log("bootstrapping loaded");
     loaded--;
@@ -146,7 +147,6 @@ function saveData(data) {
 	setCookie("game_data", json_data, 10^5);
 }
 function readData() {
-       return {progress:[0,3,3,3,3,3,3,3,3,3,3,3,3,3,3]};
 	json_data = getCookie("game_data");
 	if (json_data !== undefined) {
 		return JSON.parse(json_data);
