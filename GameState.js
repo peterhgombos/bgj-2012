@@ -21,6 +21,8 @@ GameState.prototype.init = function(){
 GameState.prototype.resume = function(message){
     this.readLevel(message);
     this.message = message;
+    this.level_id = (function(){a=message.split("-");return (15*(a[0]-1))+(a[1]-1)})();
+    console.log("Loaded level " + this.level_id);
     this.gameMenuWindow = new GameMenuWindow(this);
     this.windmills = [];
     this.has_won = false;
@@ -68,6 +70,9 @@ GameState.prototype.update = function() {
 GameState.prototype.win = function() {
     this.ps.printActiveAttractors();
     this.gameMenuWindow.show();
+    game_data["progress"][this.level_id] = 1;
+    game_data["progress"][this.level_id+1] = 0;
+    saveData(game_data);
 }
 
 GameState.prototype.render = function(ctx) {
