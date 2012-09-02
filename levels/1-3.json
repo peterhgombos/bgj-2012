@@ -6,5 +6,6 @@
             [6,3]
 		],
     "attractors": [0.4, 0.4, 0.7, 0.7, 0.7],
+    "minimum_attractors":3,
     "emitter": {"x": 3.5, "xVariance": 0.2, "y":0.1, "yVariance":0.2, "speed":0.5, "direction":90, "dxVariance":0.001, "dyVariance":0.001}
 }
