@@ -79,7 +79,7 @@ GameState.prototype.update = function() {
 GameState.prototype.win = function() {
     cdd.reset();
     var activeAttractors = this.ps.getActiveAttractors();
-    var attractor_score = Math.round(3*this.level_data.minimum_attractors/activeAttractors.length);
+    var attractor_score = (3*this.level_data.minimum_attractors/activeAttractors.length)|0;
     if (attractor_score < 1) attractor_score = 1;
     if (attractor_score > 3) attractor_score = 3;
     this.gameMenuWindow.show(attractor_score);
