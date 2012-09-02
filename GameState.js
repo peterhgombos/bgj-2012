@@ -13,10 +13,15 @@ GameState.prototype.init = function(){
                 self.ps.activateAttractor(e.draggable);
             }
     });
+    this.gameMenuWindow = new GameMenuWindow(this);
 }
 
 GameState.prototype.resume = function(message){
     this.readLevel(message);
+    this.message = message;
+}
+GameState.prototype.restart = function() {
+    sm.changeState("game", this.message);
 }
 GameState.prototype.levelDataLoaded = function(level_data) {
     this.level_data = level_data;
@@ -30,13 +35,14 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 }
 
 GameState.prototype.pause = function(){
-	// pause
+    this.gameMenuWindow.hide();
 }
 
 GameState.prototype.update = function() {
     if (!this.is_ready) return;
     this.ps.update();
     this.gameObjectContainer.update();
+    this.gameMenuWindow.update();
 
     var completed = 0;
     for(var i=0;i<this.windmills.length;i++){
@@ -45,7 +51,8 @@ GameState.prototype.update = function() {
     }
     if(completed == this.windmills.length){
         /* TODO: do stuff when we win */
-        sm.changeState("levelmenu");
+        this.gameMenuWindow.show();
+        console.log("showing gamemenuwindow");
     }
 }
 
@@ -58,6 +65,7 @@ GameState.prototype.render = function(ctx) {
 
     this.gameObjectContainer.render(ctx);
     this.ps.render(ctx);
+    this.gameMenuWindow.render(ctx);
 }
 
 GameState.prototype.readLevel = function(level) {
