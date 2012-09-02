@@ -102,6 +102,7 @@ function bootstrap(){
 	scanlinecanvas = document.createElement("canvas");
 	scanlinectx = scanlinecanvas.getContext("2d");
 	game_data = readData();
+    cdd = new CanvasDragDrop(canvas);
 
 	sm = new StateManager();
     Particle.prototype.sprite = (loaded++,function(){
@@ -242,3 +243,11 @@ window.addEventListener('touchstart', yo);
 	}
 
 window.onresize = resize;
+
+/* global mixin for position/size-objects that do AABB collision with another posititon/size-object */
+function contains(obj){
+    return obj.position.x < this.position.x+this.size.w &&
+       obj.position.x+obj.size.w > this.position.x &&
+       obj.position.y < this.position.y+this.size.h &&
+       obj.position.y+obj.size.h > this.position.y;
+}
