@@ -34,7 +34,8 @@ GameState.prototype.restart = function() {
 }
 GameState.prototype.levelDataLoaded = function(level_data) {
     this.level_data = level_data;
-    this.ps = new ParticleSystem(this.level_data.emitter, this.level_data.attractors);
+    console.log(this.level_data);
+    this.ps = new ParticleSystem(this.level_data.emitter, this.level_data.attractors.slice());
     for(var i=0;i<this.level_data.windmills.length;i++){
         var wm = this.level_data.windmills[i];
         this.windmills[i] = new Windmill(wm[0],wm[1],1,1,this.ps);
