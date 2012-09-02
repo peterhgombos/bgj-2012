@@ -11,7 +11,6 @@ GameState.prototype.init = function(){
         [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]
         ];
     this.is_ready = false;
-    this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
 }
 
 GameState.prototype.resume = function(message){
@@ -39,10 +38,12 @@ GameState.prototype.levelDataLoaded = function(level_data) {
         var w = this.level_data.walls[i];
         this.walls[i] = new Wall(w.x, w.y, w.w, w.h, this.ps);
     }
+    this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
     this.is_ready = true;
 }
 
 GameState.prototype.pause = function(){
+    cdd.reset();
     if (this.gameMenuWindow && this.gameMenuWindow.visible) this.gameMenuWindow.hide();
 }
 
@@ -71,9 +72,10 @@ GameState.prototype.update = function() {
 GameState.prototype.win = function() {
     var activeAttractors = this.ps.getActiveAttractors();
     var attractor_score = Math.round(3*this.level_data.minimum_attractors/activeAttractors.length);
-    console.log(attractor_score);
+    if (attractor_score < 1) attractor_score = 1;
+    if (attractor_score > 3) attractor_score = 3;
     this.gameMenuWindow.show(attractor_score);
-    game_data["progress"][this.level_id] = Math.min(Math.max(attractor_score, game_data["progress"][this.level_id], 1),3);
+    game_data["progress"][this.level_id] = Math.max(attractor_score, game_data["progress"][this.level_id]);
     if (game_data["progress"][this.level_id+1] == -1) game_data["progress"][this.level_id+1] = 0;
     saveData(game_data);
 }
