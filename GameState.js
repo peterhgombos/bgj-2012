@@ -33,6 +33,11 @@ GameState.prototype.levelDataLoaded = function(level_data) {
         var wm = this.level_data.windmills[i];
         this.windmills[i] = new Windmill(wm[0],wm[1],1,1,this.ps);
     }
+    this.walls = [];
+    for(var i=0;i<this.level_data.walls.length; i++) {
+        var w = this.level_data.walls[i];
+        this.walls[i] = new Wall(w.x, w.y, w.w, w.h, this.ps);
+    }
     this.is_ready = true;
 }
 
@@ -81,6 +86,9 @@ GameState.prototype.render = function(ctx) {
     ctx.restore();
     for(var i=0;i<this.windmills.length;i++){
         this.windmills[i].render(ctx);
+    }
+    for(var i=0;i<this.walls.length;i++){
+        this.walls[i].render(ctx);
     }
 
     this.gameObjectContainer.render(ctx);
