@@ -9,7 +9,6 @@ Particle.prototype.render = function(ctx){
     /* draw a rectangle for now */
     ctx.save();
     ctx.globalAlpha = this.opacity;
-    ctx.strokeStyle = "#43B0B2";
     ctx.strokeStyle = "rgb(167,236,238)";
     ctx.beginPath();
     ctx.moveTo(this.position.x*GU,this.position.y*GU);

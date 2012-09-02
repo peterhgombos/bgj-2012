@@ -118,7 +118,6 @@ ParticleSystem.prototype.getActiveAttractors = function() {
 
 ParticleSystem.prototype.render = function(ctx){
     ctx.save();
-    //ctx.globalCompositeOperation = "lighter";
     for(var i=0;i<this.num_active_particles;i++){
         this.particles[i].render(ctx);
     }
