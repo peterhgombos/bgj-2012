@@ -96,6 +96,15 @@ ParticleSystem.prototype.deactivateAttractor = function(a) {
         }
     }
 }
+ParticleSystem.prototype.printActiveAttractors = function() {
+    var solution = [];
+    for (var i=0; i < this.attractors.length; i++) {
+        if ( this.attractors[i].active ) {
+            solution.push( {x:this.attractors[i].position.x, y:this.attractors[i].position.y, size:this.attractors[i].size.w} );
+        }
+    }
+    console.log(solution);
+}
 
 ParticleSystem.prototype.render = function(ctx){
     ctx.save();
