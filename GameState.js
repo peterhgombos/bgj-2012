@@ -7,8 +7,8 @@ GameState.prototype.init = function(){
     this.background = loadImage("resources/gamebg.png");
     this.completebox = loadImage("resources/completebox.png");
     this.elements = [
-        [function(){self.restart()}, {x:14.2, y:7.5, w:.6, h:.6}],
-        [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]
+        [function(){self.restart()}, {x:15, y:8.1, w:.9, h:.7}],
+        [function(){sm.changeState("levelmenu")}, {x:14, y:8.1, w:.9, h:.7}]
         ];
     this.is_ready = false;
 }
@@ -98,6 +98,11 @@ GameState.prototype.render = function(ctx) {
     this.gameObjectContainer.render(ctx);
     this.ps.render(ctx);
     this.gameMenuWindow.render(ctx);
+    /*for(var i=0;i<this.elements.length;i++) {
+        var o = this.elements[i][1];
+        ctx.fillStyle = "rgba(255,0,0,0.5)";
+        ctx.fillRect(o.x*GU,o.y*GU,o.w*GU,o.h*GU);
+    }*/
 }
 
 GameState.prototype.readLevel = function(level) {
