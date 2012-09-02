@@ -24,8 +24,8 @@ function ParticleSystem(emitter, attractors){
             list_y_offset += attractors[i-1] + .2;
         }
         var mass = Math.pow(attractors[i],2)*270;
-        if (this.attractors[i] < 0) {
-            this.attractors[i] *= -1;
+        if (attractors[i] < 0) {
+            attractors[i] *= -1;
             mass *= -1;
         }
         this.attractors[i] = new ParticleAttractor(
