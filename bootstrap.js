@@ -177,7 +177,7 @@ function relMouseCoords(e){
 
 document.addEventListener('click', yo);
 document.addEventListener('touchstart', yo);
-document.addEventListener('touchstart', function(e){e.preventDefault();e.stopPropagation();return false;});
+document.addEventListener('touchmove', function(e){e.preventDefault();e.stopPropagation();return false;});
         
     function yo(e){
         e.preventDefault();

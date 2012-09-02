@@ -5,6 +5,7 @@ GameState.prototype.init = function(){
     var self = this;
     this.level_data = [];
     this.background = loadImage("resources/gamebg.png");
+    this.completebox = loadImage("resources/completebox.png");
     this.elements = [
         [function(){self.restart()}, {x:14.2, y:7.5, w:.6, h:.6}],
         [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]

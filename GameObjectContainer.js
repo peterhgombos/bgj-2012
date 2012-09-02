@@ -12,8 +12,6 @@ function GameObjectContainer(attractors) {
 
 
 GameObjectContainer.prototype.render = function(ctx) {
-    ctx.fillStyle = "red";
-    ctx.fillRect(14*GU, 0, 2*GU, 9*GU);
 }
 GameObjectContainer.prototype.update = function() {
 }

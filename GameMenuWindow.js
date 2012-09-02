@@ -2,9 +2,9 @@ function GameMenuWindow(game) {
     var self = this;
     this.visible = false;
     this.buttons = [
-        [this.gotoLevelMenu, {image: "level-menu.png", x:5.25, y:5, w:1.5,h:1}],
-        [function(){self.restartLevel()}, {image: "restart.png", x:7.25, y:5, w:1.5, h:1}],
-        [function(){self.nextLevel()}, {image: "next-level.png", x:9.25, y:5, w:1.5, h:1}]
+        [this.gotoLevelMenu, {image: "level-menu.png", x:6, y:5.2, w:1.2,h:0.9}],
+        [function(){self.restartLevel()}, {image: "restart.png", x:7.55, y:5.2, w:1.2, h:0.9}],
+        [function(){self.nextLevel()}, {image: "next-level.png", x:9.1, y:5.2, w:1.2, h:0.9}]
         ];
     this.game = game;
 }
@@ -21,13 +21,12 @@ GameMenuWindow.prototype.update = function() {
 
 GameMenuWindow.prototype.render = function(ctx) {
     if (!this.visible) return;
-    ctx.fillStyle = "blue";
-    ctx.fillRect(5*GU, 3*GU, 6*GU, 3.5*GU);
-    ctx.fillStyle = "green";
-    for ( var i=0; i < this.buttons.length; i++ ) {
-        var button = this.buttons[i][1];
-        ctx.fillRect(button.x*GU, button.y*GU, button.w*GU, button.h*GU);
-    }
+        ctx.save();
+        var scaler = 6*GU/this.game.completebox.width;
+        ctx.scale(scaler, scaler);
+        ctx.translate(5*GU/scaler,2.9*GU/scaler);
+        ctx.drawImage(this.game.completebox,0,0);
+        ctx.restore();
 }
 
 GameMenuWindow.prototype.gotoLevelMenu = function() {
