@@ -78,6 +78,19 @@ function bootstrap(){
     ParticleAttractor.prototype.onsprite = loadImage("resources/attractor-on.png");
     ParticleAttractor.prototype.offsprite = loadImage("resources/attractor-off.png");
     ParticleAttractor.prototype.bluesprite = loadImage("resources/attractor-blue.png");
+
+    Wall.prototype.treestile =loadImage("resources/trees-tile.png");
+    Wall.prototype.treescorner =loadImage("resources/trees-corner.png");
+    Wall.prototype.treesmid =loadImage("resources/trees-mid.png");
+    Wall.prototype.treestop =loadImage("resources/trees-top.png");
+    Wall.prototype.treesbot =loadImage("resources/trees-bot.png");
+    Wall.prototype.treesleft =loadImage("resources/trees-left.png");
+    Wall.prototype.treesright =loadImage("resources/trees-right.png");
+    Wall.prototype.treestopleft =loadImage("resources/trees-topleft.png");
+    Wall.prototype.treestopright =loadImage("resources/trees-topright.png");
+    Wall.prototype.treesbotleft =loadImage("resources/trees-botleft.png");
+    Wall.prototype.treesbotright =loadImage("resources/trees-botright.png");
+
 	dt = 0;
 	t = 0;
 	time = +new Date();
@@ -131,6 +144,7 @@ function saveData(data) {
 	setCookie("game_data", json_data, 10^5);
 }
 function readData() {
+       return {progress:[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]};
 	json_data = getCookie("game_data");
 	if (json_data !== undefined) {
 		return JSON.parse(json_data);
