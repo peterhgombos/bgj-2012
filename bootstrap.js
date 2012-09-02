@@ -74,12 +74,9 @@ function bootstrap(){
     cdd = new CanvasDragDrop(canvas);
 
 	sm = new StateManager();
-    Particle.prototype.sprite = (loaded++,function(){
-        var img = new Image();
-        img.onload = function(){ loaded--; }
-        img.src = "particle.png";
-        return img;
-    })();
+    Particle.prototype.sprite = loadImage("particle.png");
+    ParticleAttractor.prototype.onsprite = loadImage("resources/attractor-on.png");
+    ParticleAttractor.prototype.offsprite = loadImage("resources/attractor-off.png");
 	dt = 0;
 	t = 0;
 	time = +new Date();
@@ -180,8 +177,11 @@ function relMouseCoords(e){
 
 window.addEventListener('click', yo);
 window.addEventListener('touchstart', yo);
+window.addEventListener('touchstart', function(e){e.preventDefault();e.stopPropagation();return false;});
         
     function yo(e){
+        e.preventDefault();
+        e.stopPropagation();
 	    mouseXY = relMouseCoords(e);
         var clickables;
         if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
@@ -200,6 +200,7 @@ window.addEventListener('touchstart', yo);
                 break;
 			}
 		}
+        return false;
 	}
 
 window.onresize = resize;

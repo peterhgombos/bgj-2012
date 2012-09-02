@@ -11,12 +11,6 @@ GameState.prototype.init = function(){
         ];
     this.is_ready = false;
     this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
-    this.gameArea = {position:{x:0,y:0}, size: {w:14, h:9}};
-    cdd.makeDroppable(this.gameArea, {
-            "drop":function(e){
-                self.ps.activateAttractor(e.draggable);
-            }
-    });
 }
 
 GameState.prototype.resume = function(message){
