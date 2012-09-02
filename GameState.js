@@ -104,6 +104,7 @@ GameState.prototype.readLevel = function(level) {
             return;
         }
         level_data = JSON.parse(data);
+        if (level_data.walls === undefined) level_data.walls = [];
         self.levelDataLoaded(level_data);
     });
 }
