@@ -4,7 +4,7 @@ function MainMenuState(){
 MainMenuState.prototype.init = function(){
     this.background = loadImage("resources/mainmenubg.png");
     this.elements = [];
-	this.elements.push([this.playButtonClicked, {x:7, y:3.5, w:2, h:2}]);
+	this.elements.push([this.playButtonClicked, {x:7, y:6.5, w:2, h:2}]);
 }
 
 MainMenuState.prototype.pause = function(){
