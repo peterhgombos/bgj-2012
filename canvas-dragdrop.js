@@ -13,6 +13,7 @@ function CanvasDragDrop(canvas){
     this.callbacks["start"] = function(e){
         /* find element under mouse position */
         var coords = that.relMouseCoords(e);
+        console.log("start",coords.x,coords.y);
         /* if there is an element, set as only item being dragged */
         for(var i=0;i<that.draggables.length;i++){
             var draggable = that.draggables[i];
@@ -20,14 +21,15 @@ function CanvasDragDrop(canvas){
                 /* defensively check if anything is already being dragged */
                 if(that.dragged){
                     e.draggable = that.dragged.obj;
-                    (that.dragged.callbacks["dragend"]||function(){}).call(that.dragged.obj,e);
+                    (that.dragged.callbacks.dragend||function(){}).call(that.dragged.obj,e);
                 }
                 e.preventDefault();
                 that.dragged = draggable;
+                console.log("start to drag!",that.dragged);
                 that.xoffset = -draggable.obj.position.x + coords.x;
                 that.yoffset = -draggable.obj.position.y + coords.y;
                 e.draggable = that.dragged.obj;
-                (that.dragged.callbacks["dragstart"]||function(e){}).call(draggable.obj,e);
+                (that.dragged.callbacks.dragstart||function(e){console.log("NO DRAGSTART DEFINED!")}).call(draggable.obj,e);
                 break;
             }
         }
@@ -52,8 +54,6 @@ function CanvasDragDrop(canvas){
         /* if any element is being dragged, set as undragged, and see if any element has been dropped upon */
         if(that.dragged){
             var coords = that.relMouseCoords(e);
-            console.log(coords.x);
-            console.log(coords.y);
             e.draggable = that.dragged.obj;
             (that.dragged.callbacks["dragend"]||function(){}).call(that.dragged.obj,e);
             for(var i=0;i<that.droppables.length;i++){
