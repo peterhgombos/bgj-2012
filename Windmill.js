@@ -5,17 +5,19 @@ function Windmill(x, y, w, h,ps){
     this.power = 0;
     this.bodysprite = loadImage("resources/windmill.png");
     this.bladesprite = loadImage("resources/blades.png");
+    this.loadingbar = loadImage("resources/loading-bar.png");
     this.t = 0;
 
     /* global mixin */
     this.contains = contains;
+    this.barsize = 0.0;
 
     this.GOAL_POWER = 100;
 
     var that = this;
     ps.addCollider(this,function(p){
-        that.power < that.GOAL_POWER && that.power++;
-    });
+            that.power < that.GOAL_POWER && that.power++;
+            });
 }
 
 Windmill.prototype.render = function(ctx){
@@ -28,12 +30,18 @@ Windmill.prototype.render = function(ctx){
     ctx.rotate(-this.t/1000);
     ctx.drawImage(this.bladesprite,-this.bladesprite.width*0.5,-this.bladesprite.height*0.5);
     ctx.restore();
+    ctx.drawImage(this.loadingbar, this.position.x*GU+0.25*GU, (this.position.y+this.size.h+0.25)*GU, .5*GU*this.barsize, 0.1*GU);
 }
 
 Windmill.prototype.update = function(){
     this.t+=this.power*1.5;
     this.power-=3;
+    this.barsize=this.power/this.GOAL_POWER;
     if(this.power < 0){
         this.power = 0;
+        this.barsize = 0;
+    }
+    if(this.power>this.GOAL_POWER) {
+        this.barsize = 1;
     }
 }
