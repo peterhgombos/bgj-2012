@@ -36,6 +36,7 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 
 GameState.prototype.pause = function(){
     this.gameMenuWindow.hide();
+    console.log("puase!");
 }
 
 GameState.prototype.update = function() {
@@ -52,7 +53,6 @@ GameState.prototype.update = function() {
     if(completed == this.windmills.length){
         /* TODO: do stuff when we win */
         this.gameMenuWindow.show();
-        console.log("showing gamemenuwindow");
     }
 }
 
