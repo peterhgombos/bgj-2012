@@ -72,6 +72,7 @@ function bootstrap(){
 	scanlinectx = scanlinecanvas.getContext("2d");
 	game_data = readData();
     cdd = new CanvasDragDrop(canvas);
+    music = new MusicManager();
 
 	sm = new StateManager();
     Particle.prototype.sprite = loadImage("particle.png");
