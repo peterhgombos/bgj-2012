@@ -140,7 +140,7 @@ function bootstrap(){
 
 	/* start the game */
 
-	sm.changeState("game","1-1");
+	sm.changeState("mainmenu");
 
     console.log("bootstrapping loaded");
     loaded--;
