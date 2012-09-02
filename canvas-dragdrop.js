@@ -139,6 +139,12 @@ CanvasDragDrop.prototype.relMouseCoords = function(e){
     return {x:canvasX/GU, y:canvasY/GU}
 }
 
+CanvasDragDrop.prototype.reset = function(){
+    this.draggables = [];
+    this.droppables = [];
+    this.dragged = undefined;
+}
+
 
 /* added for convenience */
 

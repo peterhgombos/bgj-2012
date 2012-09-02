@@ -43,6 +43,7 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 }
 
 GameState.prototype.pause = function(){
+    cdd.reset();
     if (this.gameMenuWindow && this.gameMenuWindow.visible) this.gameMenuWindow.hide();
 }
 
