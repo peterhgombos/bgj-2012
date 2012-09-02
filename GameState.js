@@ -21,6 +21,11 @@ GameState.prototype.resume = function(message){
 GameState.prototype.levelDataLoaded = function(level_data) {
     this.level_data = level_data;
     this.ps = new ParticleSystem(this.level_data.emitter, this.level_data.attractors);
+    this.windmills = [];
+    for(var i=0;i<this.level_data.windmills.length;i++){
+        var wm = this.level_data.windmills[i];
+        this.windmills[i] = new Windmill(wm[0],wm[1],1,1,this.ps);
+    }
     this.is_ready = true;
 }
 
@@ -32,14 +37,23 @@ GameState.prototype.update = function() {
     if (!this.is_ready) return;
     this.ps.update();
     this.gameObjectContainer.update();
+
+    var completed = 0;
+    for(var i=0;i<this.windmills.length;i++){
+        this.windmills[i].update();
+        completed += this.windmills[i].power > this.windmills[i].GOAL_POWER-10;
+    }
+    if(completed == this.windmills.length){
+        /* TODO: do stuff when we win */
+        sm.changeState("levelmenu");
+    }
 }
 
 GameState.prototype.render = function(ctx) {
     if (!this.is_ready) return;
-    ctx.fillStyle = "yellow";
-    for (var i=0; i<this.level_data.windmills.length; i++) {
-        var windmill = this.level_data.windmills[i];
-        ctx.fillRect((windmill[0]-.5)*GU, (windmill[1]-.5)*GU, GU, GU);
+
+    for(var i=0;i<this.windmills.length;i++){
+        this.windmills[i].render(ctx);
     }
 
     this.gameObjectContainer.render(ctx);

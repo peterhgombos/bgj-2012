@@ -141,7 +141,7 @@ function bootstrap(){
 
 	/* start the game */
 
-	sm.changeState("mainmenu");
+	sm.changeState("game","1-1");
 
     console.log("bootstrapping loaded");
     loaded--;
@@ -243,3 +243,11 @@ window.addEventListener('touchstart', yo);
 	}
 
 window.onresize = resize;
+
+/* global mixin for position/size-objects that do AABB collision with another posititon/size-object */
+function contains(obj){
+    return obj.position.x < this.position.x+this.size.w &&
+       obj.position.x+obj.size.w > this.position.x &&
+       obj.position.y < this.position.y+this.size.h &&
+       obj.position.y+obj.size.h > this.position.y;
+}
