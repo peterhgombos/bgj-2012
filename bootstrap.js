@@ -44,46 +44,13 @@ function loop(){
     dt += (t-old_time);
     old_time = t;
     while(dt>20){
-        missedGFXFrames++;
         sm.update();
         dt-= 20;
     }
     /* clearing canvas */
     canvas.width = canvas.width;
-	missedGFXFrames--;
     sm.render(ctx);
 
-    /* post process scanlines */
-    /*
-    if(true || missedGFXFrames < 20){
-    ctx.drawImage(scanlinecanvas,0,0);
-    }
-    */
-    
-    
-    /* post process glow */
-    /*
-    if(true || missedGFXFrames < 10){
-	    blurcanvas.width = blurcanvas.width;
-	    blurctx.scale(0.5,0.5);
-	    blurctx.drawImage(canvas,0,0);
-	    for(var i=0;i<1;i++){
-		    glowcanvas.width = glowcanvas.width;
-		    glowctx.scale(2,2);
-		    glowctx.drawImage(blurcanvas,0,0);
-		    blurcanvas.width = blurcanvas.width;
-		    blurctx.scale(0.5,0.5);
-		    blurctx.drawImage(glowcanvas,0,0);
-	    }
-    ctx.save();
-    ctx.fillStyle = "rgba(0,0,0,0.5)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.globalCompositeOperation = "lighter";
-    ctx.globalAlpha = 0.5;
-    ctx.drawImage(glowcanvas,0,0);
-    ctx.restore();
-    }
-    */
 
 
     requestAnimFrame(loop);
@@ -159,24 +126,6 @@ function resize(e){
 	canvas.width = 16*GU;
 	canvas.height = 9*GU;
 	canvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 "+((window.innerWidth-16*GU)/2)+"px";
-	blurcanvas.width = 16*GU/2;
-	blurcanvas.height = 9*GU/2;
-	glowcanvas.width = 16*GU;
-	glowcanvas.height = 9*GU;
-	scanlinecanvas.width = 16*GU;
-	scanlinecanvas.height = 9*GU;
-	scanlinecanvas.style.margin = ((window.innerHeight - 9*GU) /2)+"px 0 0 "+((window.innerWidth-16*GU)/2)+"px";
-	scanlinectx.fillStyle = "rgba(0,0,0,0.05)";
-	for(var i=0;i<9;i++){
-		scanlinectx.fillRect(0,i*GU+0.0*GU,16*GU,0.1*GU);
-		scanlinectx.fillRect(0,i*GU+0.2*GU,16*GU,0.1*GU);
-		scanlinectx.fillRect(0,i*GU+0.4*GU,16*GU,0.1*GU);
-		scanlinectx.fillRect(0,i*GU+0.6*GU,16*GU,0.1*GU);
-		scanlinectx.fillRect(0,i*GU+0.8*GU,16*GU,0.1*GU);
-	}
-	scanlinectx.save();
-	scanlinectx.scale(16*GU/1920,16*GU/1920);
-	scanlinectx.restore();
 }
 
 function saveData(data) {

@@ -5,6 +5,7 @@ LevelMenuState.prototype.init = function() {
     this.numberOfLevels = 15;
     this.background = loadImage("resources/levelmenustaticbg.png");
     this.sky = loadImage("resources/skybg.png");
+    this.star = loadImage("resources/star.png");
     this.elements = [];
     this.levelSprites = [];
     this.levelTiles = [];
@@ -17,7 +18,7 @@ LevelMenuState.prototype.init = function() {
 
 LevelMenuState.prototype.resume = function() {
     for (var i=0;i<this.numberOfLevels;i++) {
-            this.levelTiles[i] = {x: 1.5+2.75*(i%5), y: 1.5+2.25*((i/5)|0), w:2, h:2, locked:game_data.progress[i]<0, stars:Math.min(game_data.progress[i],0)};
+            this.levelTiles[i] = {x: 1.5+2.75*(i%5), y: 1.5+2.25*((i/5)|0), w:2, h:2, locked:game_data.progress[i]<0, stars:Math.max(game_data.progress[i],0)};
         if(game_data.progress[i] >= 0){
             this.elements.push([this.chooseLevel, this.levelTiles[i], i ]);
         }
@@ -50,6 +51,11 @@ LevelMenuState.prototype.render = function(ctx) {
         ctx.translate(levelTile.x*GU, levelTile.y*GU);
         ctx.scale(scaler,scaler);
         ctx.drawImage(levelTile.locked?this.lockedTile:this.levelSprites[i],0,0);
+        ctx.translate(0.22*levelTile.w*GU, 0.85*levelTile.h*GU);
+        for(var j=0;j<levelTile.stars;j++){
+            ctx.drawImage(this.star,0,0);
+            ctx.translate(0.4*GU, 0);
+        }
         ctx.restore();
     }
 }
