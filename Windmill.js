@@ -25,7 +25,7 @@ Windmill.prototype.render = function(ctx){
     ctx.scale(scaler, scaler);
     ctx.drawImage(this.bodysprite,this.bodysprite.width/2,this.bodysprite.height/3);
     ctx.translate(this.size.w*GU*0.5/scaler, this.size.h*GU*0.5/scaler);
-    ctx.rotate(this.t/1000);
+    ctx.rotate(-this.t/1000);
     ctx.drawImage(this.bladesprite,-this.bladesprite.width*0.5,-this.bladesprite.height*0.5);
     ctx.restore();
 }

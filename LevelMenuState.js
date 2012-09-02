@@ -3,21 +3,26 @@ function LevelMenuState(){
 
 LevelMenuState.prototype.init = function() {
     this.numberOfLevels = 15;
-    //this.background = loadImage("resources/levelmenubg.png");
+    this.background = loadImage("resources/levelmenustaticbg.png");
+    this.sky = loadImage("resources/skybg.png");
     this.elements = [];
     this.levelSprites = [];
     this.levelTiles = [];
+    this.t = 0;
     for(var i=0;i<15;i++){
         this.levelSprites[i] = loadImage("resources/"+(i+1)+".png");
     }
+    this.lockedTile = loadImage("resources/locked.png");
 }
 
 LevelMenuState.prototype.resume = function() {
     for (var i=0;i<this.numberOfLevels;i++) {
-        this.levelTiles[i] = {x: 1.5+2.75*(i%5), y: 1.5+2.25*((i/5)|0), w:2, h:1.5, locked:true, stars:0};
-        this.elements.push([this.chooseLevel, this.levelTiles[i], i ]);
+            this.levelTiles[i] = {x: 1.5+2.75*(i%5), y: 1.5+2.25*((i/5)|0), w:2, h:2, locked:game_data.progress[i]<0, stars:Math.min(game_data.progress[i],0)};
+        if(game_data.progress[i] >= 0){
+            this.elements.push([this.chooseLevel, this.levelTiles[i], i ]);
+        }
     }
-    this.backButtonObject = {x: 0.5, y: 0.5, w: 1.5, h: 0.5}
+    this.backButtonObject = {x: 0.25, y: 0.25, w: 1.6, h: 0.6}
     this.elements.push([this.backButton,this.backButtonObject]) 
 }
 
@@ -25,22 +30,28 @@ LevelMenuState.prototype.pause = function() {
 }
 
 LevelMenuState.prototype.update = function() {
+    this.t++;
 }
 
 LevelMenuState.prototype.render = function(ctx) { 
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,16*GU, 9*GU);
+    ctx.save();
+    var scaler = 16*GU/1920;
+    ctx.scale(scaler,scaler);
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.drawImage(this.sky,-(t/4)%this.sky.width,0);
+    ctx.drawImage(this.sky,-(t/4)%this.sky.width+this.sky.width,0);
+    ctx.globalCompositeOperation = "source-over";
+    ctx.drawImage(this.background,0,0);
+    ctx.restore();
     for (var i=0; i < this.levelTiles.length; i++) {
         var levelTile = this.levelTiles[i];
         ctx.save();
-        var scaler = GU/this.levelSprites[i].width;
+        var scaler = 1.5*GU/this.levelSprites[i].width;
         ctx.translate(levelTile.x*GU, levelTile.y*GU);
         ctx.scale(scaler,scaler);
-        ctx.drawImage(this.levelSprites[i],0,0);
+        ctx.drawImage(levelTile.locked?this.lockedTile:this.levelSprites[i],0,0);
         ctx.restore();
     }
-    ctx.fillStyle = 'grey';
-    ctx.fillRect(this.backButtonObject.x*GU, this.backButtonObject.y*GU, this.backButtonObject.w*GU, this.backButtonObject.h*GU);
 }
 
 LevelMenuState.prototype.chooseLevel = function( params ) {
