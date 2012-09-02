@@ -52,6 +52,8 @@ function CanvasDragDrop(canvas){
         /* if any element is being dragged, set as undragged, and see if any element has been dropped upon */
         if(that.dragged){
             var coords = that.relMouseCoords(e);
+            console.log(coords.x);
+            console.log(coords.y);
             e.draggable = that.dragged.obj;
             (that.dragged.callbacks["dragend"]||function(){}).call(that.dragged.obj,e);
             for(var i=0;i<that.droppables.length;i++){
@@ -131,8 +133,8 @@ CanvasDragDrop.prototype.relMouseCoords = function(e){
     }
     while(currentElement = currentElement.offsetParent);
 
-    canvasX = (event.pageX||(event.touches[0]&&event.touches[0].pageX)||(this.cached_coords.x+totalOffsetX)) - totalOffsetX;
-    canvasY = (event.pageY||(event.touches[0]&&event.touches[0].pageY)||(this.cached_coords.y+totalOffsetY)) - totalOffsetY;
+    canvasX = (event.pageX||(event.touches[0]&&event.touches[0].pageX)||(GU*this.cached_coords.x+totalOffsetX)) - totalOffsetX;
+    canvasY = (event.pageY||(event.touches[0]&&event.touches[0].pageY)||(GU*this.cached_coords.y+totalOffsetY)) - totalOffsetY;
 
     return {x:canvasX/GU, y:canvasY/GU}
 }
