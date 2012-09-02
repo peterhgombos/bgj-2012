@@ -1,9 +1,10 @@
 {
 	"background": "tile.jpg",
 	"windmills": [
-			[12.5, 1]
+			[7, 7.2]
 		],
-    "attractors": [0.4, 0.7, 1, 1.2],
+    "attractors": [0.4, 0.7, 1, 1],
+    "minimum_attractors":2,
     "emitter": {"x": 7.5, "xVariance": 0.5, "y":5, "yVariance":0.5, "speed":0.2, "direction":270, "dxVariance":0.001, "dyVariance":0.001},
     "walls": [
             {"x":0, "y":0, "w":2, "h":9},
@@ -13,5 +14,4 @@
             {"x":8.7, "y":1.8, "w":2.7, "h":3.8}
         ],
 
-    "minimum_attractors": 1
 }
