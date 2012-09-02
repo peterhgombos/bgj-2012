@@ -69,7 +69,8 @@ GameState.prototype.update = function() {
 }
 GameState.prototype.win = function() {
     var activeAttractors = this.ps.getActiveAttractors();
-    var attractor_score = Math.round((this.level_data.attractors.length-activeAttractors.length)/this.level_data.attractors.length*3+1);
+    var attractor_score = Math.round(3*this.level_data.minimum_attractors/activeAttractors.length);
+    console.log(attractor_score);
     this.gameMenuWindow.show();
     game_data["progress"][this.level_id] = Math.min(Math.max(attractor_score, game_data["progress"][this.level_id], 1),3);
     if (game_data["progress"][this.level_id+1] == -1) game_data["progress"][this.level_id+1] = 0;
@@ -104,7 +105,10 @@ GameState.prototype.readLevel = function(level) {
             return;
         }
         level_data = JSON.parse(data);
-        if (level_data.walls === undefined) level_data.walls = [];
+
+        level_data.walls = level_data.walls||[];
+        level_data.minimum_attractors = level_data.minimum_attractors||1;
+        
         self.levelDataLoaded(level_data);
     });
 }
