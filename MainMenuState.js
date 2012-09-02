@@ -36,5 +36,5 @@ MainMenuState.prototype.update = function(){
 }
 
 MainMenuState.prototype.playButtonClicked = function(){
-	sm.changeState('levelmenu','', 'slide-left', 20);
+	sm.changeState('levelmenu','', 'slide-left', 15);
 }

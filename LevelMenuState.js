@@ -48,5 +48,5 @@ LevelMenuState.prototype.chooseLevel = function( params ) {
 }
 
 LevelMenuState.prototype.backButton = function( params ) {
-    sm.changeState('mainmenu','', 'slide-right', 10);
+    sm.changeState('mainmenu','', 'slide-right', 15);
 }
