@@ -4,6 +4,6 @@ windwill
 
 a logic game/puzzle chillax created for bacongamejam 03
 
-music created and provided by <nosoapradio.us>
+music created and provided by <http://nosoapradio.us>
 ## Docs
 * http://code.google.com/p/miniajax/
