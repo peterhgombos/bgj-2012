@@ -14,8 +14,6 @@ function ParticleSystem(emitter, attractors){
     /* list of external objects with position and size that collide with particles */
     this.colliders = [];
 
-    this.cdd = new CanvasDragDrop(canvas);
-
     /* pool of attractors */
     attractors.sort(function(a,b){return b-a});
     this.attractors = [];
@@ -136,8 +134,8 @@ ParticleSystem.prototype.update = function(){
         var a = this.attractors[i];
         for(var j=0;j<this.num_active_particles;j++){
             var p = this.particles[j];
-            var rx = a.position.x-p.position.x;
-            var ry = a.position.y-p.position.y;
+            var rx = a.position.x+a.size.w*0.5-p.position.x;
+            var ry = a.position.y+a.size.h*0.5-p.position.y;
             var rSquared = rx*rx+ry*ry;
             p.speed.dx += rx/Math.abs(rx)*(0.0001*a.m/(rSquared));
             p.speed.dy += ry/Math.abs(ry)*(0.0001*a.m/(rSquared));
