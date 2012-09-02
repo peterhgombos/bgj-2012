@@ -8,14 +8,12 @@ function ParticleAttractor(x,y,m,w,h){
 }
 
 ParticleAttractor.prototype.render = function(ctx){
-    if(DEBUG){
-        var scaler = 16*GU/1920 *0.5*this.size.w;
-        ctx.save();
-        ctx.translate((this.position.x+this.size.w*0.5)*GU, (this.size.h*0.5+this.position.y)*GU);
-        ctx.scale(scaler,scaler);
-        ctx.drawImage(this.active?this.onsprite:this.offsprite,-this.size.w*0.5*GU/scaler,-this.size.h*0.5*GU/scaler);
-        ctx.restore();
-    }
+    var scaler = 16*GU/1920 *0.5*this.size.w;
+    ctx.save();
+    ctx.translate(this.position.x*GU, this.position.y*GU);
+    ctx.scale(scaler,scaler);
+    ctx.drawImage(this.active?this.onsprite:this.offsprite,-this.size.w*0.5*GU/scaler,-this.size.h*0.5*GU/scaler);
+    ctx.restore();
 }
 
 ParticleAttractor.prototype.update = function(){
