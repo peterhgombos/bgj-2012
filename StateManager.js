@@ -58,12 +58,15 @@ StateManager.prototype.render = function(ctx){
 }
 
 StateManager.prototype.update = function(){
-    if(this.transitionTime > 0){
-        this.oldState.update();
+    if(this.transitionTime == 0){
+        if(this.oldState) this.oldState.pause();
+    }
+    if (this.transitionTime >= 0) {
         this.transitionTime--;
-        if(this.transitionTime == 0){
-            if(this.activeState) this.activeState.pause();
-        }
+    }
+
+    if(this.oldState && this.transitionTime >= 0){
+        this.oldState.update();
     }
 	this.activeState.update();
 }
