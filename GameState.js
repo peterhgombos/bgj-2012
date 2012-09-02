@@ -4,7 +4,10 @@ function GameState() {
 GameState.prototype.init = function(){
     var self = this;
     this.level_data = [];
-    this.elements = [];
+    this.elements = [
+        [function(){self.restart()}, {x:14.2, y:7.5, w:.6, h:.6}],
+        [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]
+        ];
     this.is_ready = false;
     this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
     this.gameArea = {position:{x:0,y:0}, size: {w:14, h:9}};
@@ -36,7 +39,6 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 
 GameState.prototype.pause = function(){
     this.gameMenuWindow.hide();
-    this.elements = [];
     console.log("puase!");
 }
 
@@ -52,9 +54,18 @@ GameState.prototype.update = function() {
         completed += this.windmills[i].power > this.windmills[i].GOAL_POWER-10;
     }
     if(completed == this.windmills.length){
-        /* TODO: do stuff when we win */
-        this.gameMenuWindow.show();
+        if (this.doneTimer >= 0) this.doneTimer--;
+    } else {
+        this.doneTimer = 100;
     }
+
+    if (this.doneTimer == 0) {
+        this.win();
+    }
+}
+GameState.prototype.win = function() {
+    this.ps.printActiveAttractors();
+    this.gameMenuWindow.show();
 }
 
 GameState.prototype.render = function(ctx) {

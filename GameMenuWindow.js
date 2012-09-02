@@ -8,7 +8,6 @@ function GameMenuWindow(game) {
         ];
     this.game = game;
     console.log(this.visible);
-    this.game.elements.push.apply(this.game.elements, this.buttons);
 }
 
 GameMenuWindow.prototype.show = function() {
