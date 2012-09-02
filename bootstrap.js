@@ -228,15 +228,21 @@ window.addEventListener('click', yo);
 window.addEventListener('touchstart', yo);
         
     function yo(e){
-		mouseXY = relMouseCoords(e);
-		var coordX, coordY, sizeX, sizeY;
-		for(var i=0; i<sm.activeState.elements.length;i++){
-			coordX = sm.activeState.elements[i][1].x;
-			coordY = sm.activeState.elements[i][1].y;
-			sizeX = sm.activeState.elements[i][1].w;
-			sizeY = sm.activeState.elements[i][1].h;
+	    mouseXY = relMouseCoords(e);
+        var clickables;
+        if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
+            clickables = sm.activeState.gameMenuWindow.buttons;
+        } else {
+            clickables = sm.activeState.elements;
+        }
+        var coordX, coordY, sizeX, sizeY;
+		for(var i=0; i<clickables.length;i++){
+			coordX = clickables[i][1].x;
+			coordY = clickables[i][1].y;
+			sizeX = clickables[i][1].w;
+			sizeY = clickables[i][1].h;
 			if(mouseXY.x >= coordX && mouseXY.x <= coordX+sizeX && mouseXY.y >= coordY && mouseXY.y <= coordY + sizeY){
-				sm.activeState.elements[i][0](sm.activeState.elements[i].slice(2));	
+				clickables[i][0](clickables[i].slice(2));	
                 break;
 			}
 		}

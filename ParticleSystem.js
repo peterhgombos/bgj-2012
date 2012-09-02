@@ -44,7 +44,6 @@ function ParticleSystem(emitter, attractors){
         this.emitter.dy = .085*Math.sin(rad);
         this.emitter.dx = .085*Math.cos(rad);
     }
-    console.log(this.emitter);
 }
 
 ParticleSystem.prototype.addCollider = function(collider, callback){

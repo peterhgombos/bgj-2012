@@ -36,7 +36,6 @@ GameState.prototype.levelDataLoaded = function(level_data) {
 
 GameState.prototype.pause = function(){
     this.gameMenuWindow.hide();
-    this.elements = [];
     console.log("puase!");
 }
 
