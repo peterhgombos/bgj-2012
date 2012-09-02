@@ -27,7 +27,7 @@ function ParticleSystem(emitter, attractors){
         this.attractors[i] = new ParticleAttractor(
                 (14.2 + list_x_offset),
                 (1 + list_y_offset),
-                attractors[i]*650,
+                Math.pow(attractors[i],2)*270,
                 attractors[i],
                 attractors[i]
                 );

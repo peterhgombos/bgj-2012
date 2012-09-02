@@ -84,7 +84,7 @@ GameState.prototype.render = function(ctx) {
 
 GameState.prototype.readLevel = function(level) {
     var self = this;
-    ajax.get('levels/' + level + '.json', function(data) {
+    ajax.get('levels/' + level + '.json?t=' + time, function(data) {
 		if (data.substr(0,1) != "{") return false;
         level_data = JSON.parse(data);
         self.levelDataLoaded(level_data);
