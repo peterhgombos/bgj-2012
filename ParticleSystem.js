@@ -32,7 +32,12 @@ function ParticleSystem(emitter, attractors){
                 attractors[i],
                 attractors[i]
                 );
-        cdd.makeDraggable(this.attractors[i]);
+        var that = this;
+        cdd.makeDraggable(this.attractors[i],{
+            "dragstart":function(e){
+                that.activateAttractor(this); 
+            }
+        });
         list_x_offset += attractors[i] + .2;
     }
     this.num_active_attractors = 0;

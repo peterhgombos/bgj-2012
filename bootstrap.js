@@ -74,12 +74,9 @@ function bootstrap(){
     cdd = new CanvasDragDrop(canvas);
 
 	sm = new StateManager();
-    Particle.prototype.sprite = (loaded++,function(){
-        var img = new Image();
-        img.onload = function(){ loaded--; }
-        img.src = "particle.png";
-        return img;
-    })();
+    Particle.prototype.sprite = loadImage("particle.png");
+    ParticleAttractor.prototype.onsprite = loadImage("resources/attractor-on.png");
+    ParticleAttractor.prototype.offsprite = loadImage("resources/attractor-off.png");
 	dt = 0;
 	t = 0;
 	time = +new Date();
