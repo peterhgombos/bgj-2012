@@ -181,7 +181,6 @@ document.addEventListener('touchmove', function(e){e.preventDefault();e.stopProp
         
     function yo(e){
         e.preventDefault();
-        e.stopPropagation();
 	    mouseXY = relMouseCoords(e);
         var clickables;
         if (sm.activeState.gameMenuWindow !== undefined && sm.activeState.gameMenuWindow.visible) {
@@ -200,7 +199,6 @@ document.addEventListener('touchmove', function(e){e.preventDefault();e.stopProp
                 break;
 			}
 		}
-        return false;
 	}
 
 window.onresize = resize;
