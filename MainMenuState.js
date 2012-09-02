@@ -6,7 +6,7 @@ MainMenuState.prototype.init = function(){
     this.sky = loadImage("resources/skybg.png");
     this.blades = loadImage("resources/blades.png");
     this.elements = [];
-    this.playButton = {x:7, y:6.5, w:2, h:2};
+    this.playButton = {x:1.4, y:3.6, w:3.4, h:1.5};
 	this.elements.push([this.playButtonClicked, this.playButton ]);
     this.t = 0;
 }
@@ -29,13 +29,7 @@ MainMenuState.prototype.render = function(ctx){
     ctx.rotate(-this.t/300);
     ctx.drawImage(this.blades,-this.blades.width/2,-this.blades.height/2);
     ctx.restore();
-    ctx.save();
-    var scaler = (1+0.1*Math.sin(t/200))*GU/this.cloudtex.width*16;
-    ctx.translate(this.cloudtex.width/2, this.cloudtex.height/2);
-    ctx.scale(scaler, scaler);
-    ctx.drawImage(this.cloudtex,0,0);
-    ctx.restore();
-	ctx.fillStyle = 'red';
+	ctx.fillStyle = "rgba(0,0,0,0.5)";
 	ctx.fillRect(this.playButton.x*GU, this.playButton.y*GU, this.playButton.w*GU, this.playButton.h*GU);
 }
 
@@ -44,5 +38,5 @@ MainMenuState.prototype.update = function(){
 }
 
 MainMenuState.prototype.playButtonClicked = function(){
-	sm.changeState('levelmenu','', 'slide-left', 10);
+	sm.changeState('levelmenu','', 'slide-left', 20);
 }
