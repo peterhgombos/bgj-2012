@@ -11,7 +11,6 @@ GameState.prototype.init = function(){
         [function(){sm.changeState("levelmenu")}, {x:15.2, y:7.5, w:.6, h:.6}]
         ];
     this.is_ready = false;
-    this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
 }
 
 GameState.prototype.resume = function(message){
@@ -39,6 +38,7 @@ GameState.prototype.levelDataLoaded = function(level_data) {
         var w = this.level_data.walls[i];
         this.walls[i] = new Wall(w.x, w.y, w.w, w.h, this.ps);
     }
+    this.gameObjectContainer = new GameObjectContainer(this.level_data.attractors);
     this.is_ready = true;
 }
 

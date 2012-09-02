@@ -40,6 +40,10 @@ StateManager.prototype.changeState = function(name, message, transitionEffect, t
     this.transitionEffect = transitionEffect || "slide-right";
     this.oldState = this.activeState;
     this.activeState = this.states[name];
+    if(this.transitionTime == 0){
+        this.transitionTime--;
+        this.oldState && this.oldState.pause();
+    }
     this.activeState.resume(message);
 }
 

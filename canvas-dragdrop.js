@@ -13,7 +13,6 @@ function CanvasDragDrop(canvas){
     this.callbacks["start"] = function(e){
         /* find element under mouse position */
         var coords = that.relMouseCoords(e);
-        console.log("start",coords.x,coords.y);
         /* if there is an element, set as only item being dragged */
         for(var i=0;i<that.draggables.length;i++){
             var draggable = that.draggables[i];
@@ -25,11 +24,10 @@ function CanvasDragDrop(canvas){
                 }
                 e.preventDefault();
                 that.dragged = draggable;
-                console.log("start to drag!",that.dragged);
                 that.xoffset = -draggable.obj.position.x + coords.x;
                 that.yoffset = -draggable.obj.position.y + coords.y;
                 e.draggable = that.dragged.obj;
-                (that.dragged.callbacks.dragstart||function(e){console.log("NO DRAGSTART DEFINED!")}).call(draggable.obj,e);
+                (that.dragged.callbacks.dragstart||function(e){}).call(draggable.obj,e);
                 break;
             }
         }
