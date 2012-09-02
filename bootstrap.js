@@ -138,7 +138,7 @@ function readData() {
 		return JSON.parse(json_data);
 	}else{
         /* default game_data object */
-       return {progress:[3,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]};
+       return {progress:[0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]};
     }
 }
 
