@@ -77,7 +77,8 @@ function bootstrap(){
     Particle.prototype.sprite = loadImage("particle.png");
     ParticleAttractor.prototype.onsprite = loadImage("resources/attractor-on.png");
     ParticleAttractor.prototype.offsprite = loadImage("resources/attractor-off.png");
-    ParticleAttractor.prototype.bluesprite = loadImage("resources/attractor-blue.png");
+    ParticleAttractor.prototype.bluesprite = loadImage("resources/deflector-on.png");
+    ParticleAttractor.prototype.blacksprite= loadImage("resources/deflector-off.png");
 
     Wall.prototype.treestile =loadImage("resources/trees-tile.png");
     Wall.prototype.treescorner =loadImage("resources/trees-corner.png");
@@ -145,7 +146,7 @@ function saveData(data) {
 	setCookie("game_data", json_data, 10^5);
 }
 function readData() {
-       return {progress:[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]};
+       return {progress:[0,3,3,3,3,3,3,3,3,3,3,3,3,3,3]};
 	json_data = getCookie("game_data");
 	if (json_data !== undefined) {
 		return JSON.parse(json_data);
