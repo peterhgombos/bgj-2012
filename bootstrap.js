@@ -175,9 +175,9 @@ function relMouseCoords(e){
 	return {x:canvasX/GU, y:canvasY/GU}
 }
 
-window.addEventListener('click', yo);
-window.addEventListener('touchstart', yo);
-window.addEventListener('touchstart', function(e){e.preventDefault();e.stopPropagation();return false;});
+document.addEventListener('click', yo);
+document.addEventListener('touchstart', yo);
+document.addEventListener('touchstart', function(e){e.preventDefault();e.stopPropagation();return false;});
         
     function yo(e){
         e.preventDefault();
