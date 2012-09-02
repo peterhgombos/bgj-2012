@@ -34,6 +34,7 @@ StateManager.prototype.addState = function(name, state){
 }
 
 StateManager.prototype.changeState = function(name, message, transitionEffect, transitionTime){
+    console.log("Changing to state " + name + ". Message: " + message);
     this.transitionTime = transitionTime || 0;
     this.maxTransitionTime = this.transitionTime;
     this.transitionEffect = transitionEffect || "slide-right";
@@ -65,7 +66,7 @@ StateManager.prototype.update = function(){
         this.transitionTime--;
     }
 
-    if(this.oldState && this.transitionTime >= 0){
+    if(this.oldState && this.transitionTime > 0){
         this.oldState.update();
     }
 	this.activeState.update();

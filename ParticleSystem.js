@@ -39,6 +39,12 @@ function ParticleSystem(emitter, attractors){
     /* load emitter from level or something */
     this.emitter = emitter; 
     this.emitter.timeToNext = 0;
+    if (this.emitter.direction !== undefined) {
+        var rad = this.emitter.direction/180*Math.PI;
+        this.emitter.dy = .085*Math.sin(rad);
+        this.emitter.dx = .085*Math.cos(rad);
+    }
+    console.log(this.emitter);
 }
 
 ParticleSystem.prototype.addCollider = function(collider, callback){

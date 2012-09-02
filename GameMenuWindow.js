@@ -7,15 +7,17 @@ function GameMenuWindow(game) {
         [function(){self.nextLevel()}, {image: "next-level.png", x:9.25, y:5, w:1.5, h:1}]
         ];
     this.game = game;
-    console.log(this.game);
+    console.log(this.visible);
     this.game.elements.push.apply(this.game.elements, this.buttons);
 }
 
 GameMenuWindow.prototype.show = function() {
     this.visible = true;
+    console.log("showing");
 }
 GameMenuWindow.prototype.hide = function() {
     this.visible = false;
+    console.log("hiding");
 }
 
 GameMenuWindow.prototype.update = function() {
@@ -37,7 +39,6 @@ GameMenuWindow.prototype.gotoLevelMenu = function() {
 }
 
 GameMenuWindow.prototype.restartLevel = function() {
-    console.log(this.game);
     this.game.restart();
 }
 
