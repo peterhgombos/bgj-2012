@@ -77,6 +77,7 @@ function bootstrap(){
     Particle.prototype.sprite = loadImage("particle.png");
     ParticleAttractor.prototype.onsprite = loadImage("resources/attractor-on.png");
     ParticleAttractor.prototype.offsprite = loadImage("resources/attractor-off.png");
+    ParticleAttractor.prototype.bluesprite = loadImage("resources/attractor-blue.png");
 	dt = 0;
 	t = 0;
 	time = +new Date();

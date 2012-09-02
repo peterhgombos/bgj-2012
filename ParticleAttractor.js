@@ -12,7 +12,7 @@ ParticleAttractor.prototype.render = function(ctx){
     ctx.save();
     ctx.translate(this.position.x*GU, this.position.y*GU);
     ctx.scale(scaler,scaler);
-    ctx.drawImage(this.active?this.onsprite:this.offsprite,0,0);
+    ctx.drawImage(this.active?this.m<0?this.bluesprite:this.onsprite:this.offsprite,0,0);
     ctx.restore();
 }
 
