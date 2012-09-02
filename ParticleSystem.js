@@ -26,7 +26,7 @@ function ParticleSystem(emitter, attractors){
         var mass = Math.pow(attractors[i],2)*270;
         if (attractors[i] < 0) {
             attractors[i] *= -1;
-            mass *= -1;
+            mass *= -.5;
         }
         this.attractors[i] = new ParticleAttractor(
                 (14.2 + list_x_offset),
