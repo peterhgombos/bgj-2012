@@ -68,7 +68,7 @@ GameState.prototype.update = function() {
     if(completed == this.windmills.length){
         if (this.doneTimer >= 0) this.doneTimer--;
     } else {
-        this.doneTimer = 50;
+        this.doneTimer = 10;
     }
 
     if (this.doneTimer == 0 && !this.has_won) {

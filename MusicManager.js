@@ -15,6 +15,12 @@ function MusicManager(){
         this.music.src = "resources/music/windwillmusic.ogg";
     }
 
+    this.music.setAttribute('style', 'display:none;');
     document.body.appendChild(this.music);
 }
 
+window.addEventListener('keydown', function(e) {
+    if (e.keyCode == 77) { // m
+        music.music.muted = !music.music.muted;
+    }
+});
