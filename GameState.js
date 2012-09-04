@@ -20,6 +20,10 @@ GameState.prototype.init = function(){
 
 GameState.prototype.resume = function(message){
     //this.readLevel(message);
+    if (!this.levels.hasOwnProperty(message)) {
+        sm.changeState("levelmenu", "");
+        return;
+    }
     this.windmills = [];
     this.message = message;
     this.level_id = (function(){a=message.split("-");return (15*(a[0]-1))+(a[1]-1)})();
