@@ -41,8 +41,10 @@ MainMenuState.prototype.update = function(){
 
 MainMenuState.prototype.playButtonClicked = function(){
 	sm.changeState('levelmenu','', 'slide-left', 15);
-    sm.music.load();
-    sm.music.play();
+    if (music.music.currentTime == 0) {
+        music.music.load();
+        music.music.play();
+    }
 }
 
 MainMenuState.prototype.creditsButtonClicked = function(){
