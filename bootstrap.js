@@ -93,6 +93,9 @@ function bootstrap(){
     Wall.prototype.treesbotleft =loadImage("resources/trees-botleft.png");
     Wall.prototype.treesbotright =loadImage("resources/trees-botright.png");
 
+    Windmill.prototype.bodysprite = loadImage("resources/windmill.png");
+    Windmill.prototype.bladesprite = loadImage("resources/blades.png");
+
     star = loadImage("resources/star.png");
 	dt = 0;
 	t = 0;

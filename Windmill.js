@@ -3,8 +3,6 @@ function Windmill(x, y, w, h,ps){
     this.size = {w:w||0, h:h||0};
     this.color = {r:100,g:100,b:0};
     this.power = 0;
-    this.bodysprite = loadImage("resources/windmill.png");
-    this.bladesprite = loadImage("resources/blades.png");
     this.t = 0;
 
     /* global mixin */
